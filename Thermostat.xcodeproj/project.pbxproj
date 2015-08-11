@@ -156,6 +156,7 @@
 		E98790831B55B3E300B56D1A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = "Team #19";
 				TargetAttributes = {
@@ -409,6 +410,7 @@
 				E98790AC1B55B3E300B56D1A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E98790AD1B55B3E300B56D1A /* Build configuration list for PBXNativeTarget "ThermostatTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +419,7 @@
 				E98790AF1B55B3E300B56D1A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
