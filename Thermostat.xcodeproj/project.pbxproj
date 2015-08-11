@@ -103,13 +103,14 @@
 		E987908D1B55B3E300B56D1A /* Thermostat */ = {
 			isa = PBXGroup;
 			children = (
+				E9CD3D621B7A996600545AD5 /* Controller */,
+				E9CD3D611B7A995D00545AD5 /* View */,
+				E9CD3D601B7A995400545AD5 /* Model */,
 				E98790901B55B3E300B56D1A /* AppDelegate.swift */,
-				E98790921B55B3E300B56D1A /* ViewController.swift */,
 				E98790941B55B3E300B56D1A /* Main.storyboard */,
 				E98790971B55B3E300B56D1A /* Images.xcassets */,
 				E98790991B55B3E300B56D1A /* LaunchScreen.xib */,
 				E987908E1B55B3E300B56D1A /* Supporting Files */,
-				377E8CD91B7A8D8C004C94D7 /* SettingsViewController.swift */,
 			);
 			path = Thermostat;
 			sourceTree = "<group>";
@@ -137,6 +138,29 @@
 				E98790A51B55B3E300B56D1A /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E9CD3D601B7A995400545AD5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		E9CD3D611B7A995D00545AD5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		E9CD3D621B7A996600545AD5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E98790921B55B3E300B56D1A /* ViewController.swift */,
+				377E8CD91B7A8D8C004C94D7 /* SettingsViewController.swift */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
