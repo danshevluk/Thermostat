@@ -1,0 +1,10 @@
+PODS:
+  - DatePickerCell (1.0.2)
+
+DEPENDENCIES:
+  - DatePickerCell
+
+SPEC CHECKSUMS:
+  DatePickerCell: b2abd1f6ba08f01da11baee73a503d6dc33f3118
+
+COCOAPODS: 0.38.2

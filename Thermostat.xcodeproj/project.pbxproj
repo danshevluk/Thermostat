@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		377E8CDA1B7A8D8C004C94D7 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377E8CD91B7A8D8C004C94D7 /* SettingsViewController.swift */; };
+		55130A1F15449AE9DA59886F /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4C94F33165B54DDC822D3E /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E98790911B55B3E300B56D1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98790901B55B3E300B56D1A /* AppDelegate.swift */; };
 		E98790931B55B3E300B56D1A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98790921B55B3E300B56D1A /* ViewController.swift */; };
 		E98790961B55B3E300B56D1A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E98790941B55B3E300B56D1A /* Main.storyboard */; };
@@ -26,6 +28,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		377E8CD91B7A8D8C004C94D7 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		CB4C94F33165B54DDC822D3E /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE017274D04EAA5FCAAFDD25 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		E247900372BAC8599604AFE4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E987908B1B55B3E300B56D1A /* Thermostat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thermostat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E987908F1B55B3E300B56D1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E98790901B55B3E300B56D1A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55130A1F15449AE9DA59886F /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,12 +63,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01F45128451D1538EC768557 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CB4C94F33165B54DDC822D3E /* Pods.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D12B79A48749BFB7E6059606 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E247900372BAC8599604AFE4 /* Pods.debug.xcconfig */,
+				CE017274D04EAA5FCAAFDD25 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		E98790821B55B3E300B56D1A = {
 			isa = PBXGroup;
 			children = (
 				E987908D1B55B3E300B56D1A /* Thermostat */,
 				E98790A31B55B3E300B56D1A /* ThermostatTests */,
 				E987908C1B55B3E300B56D1A /* Products */,
+				D12B79A48749BFB7E6059606 /* Pods */,
+				01F45128451D1538EC768557 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,8 +103,10 @@
 		E987908D1B55B3E300B56D1A /* Thermostat */ = {
 			isa = PBXGroup;
 			children = (
+				E9CD3D621B7A996600545AD5 /* Controller */,
+				E9CD3D611B7A995D00545AD5 /* View */,
+				E9CD3D601B7A995400545AD5 /* Model */,
 				E98790901B55B3E300B56D1A /* AppDelegate.swift */,
-				E98790921B55B3E300B56D1A /* ViewController.swift */,
 				E98790941B55B3E300B56D1A /* Main.storyboard */,
 				E98790971B55B3E300B56D1A /* Images.xcassets */,
 				E98790991B55B3E300B56D1A /* LaunchScreen.xib */,
@@ -112,6 +140,29 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		E9CD3D601B7A995400545AD5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		E9CD3D611B7A995D00545AD5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		E9CD3D621B7A996600545AD5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E98790921B55B3E300B56D1A /* ViewController.swift */,
+				377E8CD91B7A8D8C004C94D7 /* SettingsViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -119,9 +170,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E98790AA1B55B3E300B56D1A /* Build configuration list for PBXNativeTarget "Thermostat" */;
 			buildPhases = (
+				3D9D5F90026F84364727A063 /* Check Pods Manifest.lock */,
 				E98790871B55B3E300B56D1A /* Sources */,
 				E98790881B55B3E300B56D1A /* Frameworks */,
 				E98790891B55B3E300B56D1A /* Resources */,
+				2D6BE878528DCD9798BAEA94 /* Embed Pods Frameworks */,
+				CE68A4870C94FBDAEE3F2604 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -208,6 +262,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2D6BE878528DCD9798BAEA94 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3D9D5F90026F84364727A063 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CE68A4870C94FBDAEE3F2604 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E98790871B55B3E300B56D1A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -215,6 +317,7 @@
 			files = (
 				E98790931B55B3E300B56D1A /* ViewController.swift in Sources */,
 				E98790911B55B3E300B56D1A /* AppDelegate.swift in Sources */,
+				377E8CDA1B7A8D8C004C94D7 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +442,7 @@
 		};
 		E98790AB1B55B3E300B56D1A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E247900372BAC8599604AFE4 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Thermostat/Info.plist;
@@ -349,6 +453,7 @@
 		};
 		E98790AC1B55B3E300B56D1A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CE017274D04EAA5FCAAFDD25 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Thermostat/Info.plist;
