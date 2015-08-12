@@ -65,4 +65,8 @@ enum SwitchType: Int {
         switches.append(tempSwitch)
         return true
     }
+
+    func getTemperatureForHours(hours: Int, minutes: Int) -> Double {
+        return 0
+    }
 }

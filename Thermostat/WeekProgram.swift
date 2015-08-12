@@ -9,13 +9,13 @@
 import UIKit
 
 enum WeekDay: Int {
-    case Monday = 0
+    case Sunday = 1
+    case Monday
     case Tuesday
     case Wednesday
     case Thursday
     case Friday
     case Saturday
-    case Sunday
 }
 
 @objc class WeekProgram: NSObject, NSCoding {
@@ -48,5 +48,16 @@ enum WeekDay: Int {
         }
 
         return false
+    }
+
+    func getTemperatureForDate(date: NSDate) -> Double {
+        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+        if let dateComp = calendar?.components(.WeekdayCalendarUnit | .HourCalendarUnit | .MinuteCalendarUnit, fromDate: date) {
+            let dayProgram = days[dateComp.weekday]
+            let temp = dayProgram.getTemperatureForHours(dateComp.hour, minutes: dateComp.minute)
+            return temp
+        }
+
+        return 15
     }
 }
