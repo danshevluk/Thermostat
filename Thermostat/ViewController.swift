@@ -12,7 +12,15 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        //Test test test
+        let weekProgram = WeekProgram()
+        println(weekProgram)
+        let data = NSKeyedArchiver.archivedDataWithRootObject(weekProgram)
+        NSUserDefaults.standardUserDefaults().setObject(data, forKey: "weekProgram")
+        let wpData = NSUserDefaults.standardUserDefaults().objectForKey("weekProgram") as! NSData
+        let wp = NSKeyedUnarchiver.unarchiveObjectWithData(wpData) as! WeekProgram
+        println(wp)
     }
 
     override func didReceiveMemoryWarning() {
