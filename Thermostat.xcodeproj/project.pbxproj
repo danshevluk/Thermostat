@@ -13,6 +13,8 @@
 		E90A9D301B7BB4BB005B512B /* WeekProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90A9D2F1B7BB4BB005B512B /* WeekProgram.swift */; };
 		E90A9D321B7BB4C7005B512B /* DayProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90A9D311B7BB4C7005B512B /* DayProgram.swift */; };
 		E90A9D341B7BD469005B512B /* Thermostat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90A9D331B7BD469005B512B /* Thermostat.swift */; };
+		E90A9D361B7CA634005B512B /* Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90A9D351B7CA634005B512B /* Switch.swift */; };
+		E90A9D381B7CB7BE005B512B /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90A9D371B7CB7BE005B512B /* Settings.swift */; };
 		E98790911B55B3E300B56D1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98790901B55B3E300B56D1A /* AppDelegate.swift */; };
 		E98790931B55B3E300B56D1A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98790921B55B3E300B56D1A /* ViewController.swift */; };
 		E98790961B55B3E300B56D1A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E98790941B55B3E300B56D1A /* Main.storyboard */; };
@@ -40,6 +42,8 @@
 		E90A9D2F1B7BB4BB005B512B /* WeekProgram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekProgram.swift; sourceTree = "<group>"; };
 		E90A9D311B7BB4C7005B512B /* DayProgram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayProgram.swift; sourceTree = "<group>"; };
 		E90A9D331B7BD469005B512B /* Thermostat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Thermostat.swift; sourceTree = "<group>"; };
+		E90A9D351B7CA634005B512B /* Switch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Switch.swift; sourceTree = "<group>"; };
+		E90A9D371B7CB7BE005B512B /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		E987908B1B55B3E300B56D1A /* Thermostat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thermostat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E987908F1B55B3E300B56D1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E98790901B55B3E300B56D1A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -151,10 +155,12 @@
 		E9CD3D601B7A995400545AD5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E90A9D371B7CB7BE005B512B /* Settings.swift */,
 				E90A9D2D1B7BABB7005B512B /* TimeManager.swift */,
+				E90A9D331B7BD469005B512B /* Thermostat.swift */,
 				E90A9D2F1B7BB4BB005B512B /* WeekProgram.swift */,
 				E90A9D311B7BB4C7005B512B /* DayProgram.swift */,
-				E90A9D331B7BD469005B512B /* Thermostat.swift */,
+				E90A9D351B7CA634005B512B /* Switch.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -328,10 +334,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				E98790931B55B3E300B56D1A /* ViewController.swift in Sources */,
+				E90A9D361B7CA634005B512B /* Switch.swift in Sources */,
 				E90A9D321B7BB4C7005B512B /* DayProgram.swift in Sources */,
 				E98790911B55B3E300B56D1A /* AppDelegate.swift in Sources */,
 				E90A9D341B7BD469005B512B /* Thermostat.swift in Sources */,
 				E90A9D2E1B7BABB7005B512B /* TimeManager.swift in Sources */,
+				E90A9D381B7CB7BE005B512B /* Settings.swift in Sources */,
 				E90A9D301B7BB4BB005B512B /* WeekProgram.swift in Sources */,
 				377E8CDA1B7A8D8C004C94D7 /* SettingsViewController.swift in Sources */,
 			);

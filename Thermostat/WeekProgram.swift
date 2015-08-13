@@ -42,20 +42,22 @@ enum WeekDay: Int {
         aCoder.encodeObject(days, forKey: "days")
     }
 
-    func tryToAddSwitchForDay(tempSwitch: Switch, forDay day: WeekDay) -> Bool {
-        if days[day.rawValue].tryToAddSwitch(tempSwitch) {
-            return true
-        }
-
-        return false
+    func tryToAddSwitchForDay(tempSwitch: Switch, forDay day: WeekDay) -> SwitchIncertStatus {
+        return days[day.rawValue].tryToAddSwitch(tempSwitch)
     }
 
     func getTemperatureForDate(date: NSDate) -> Double {
         let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
         if let dateComp = calendar?.components(.WeekdayCalendarUnit | .HourCalendarUnit | .MinuteCalendarUnit, fromDate: date) {
             let dayProgram = days[dateComp.weekday]
-            let temp = dayProgram.getTemperatureForHours(dateComp.hour, minutes: dateComp.minute)
-            return temp
+            let tempType = dayProgram.getTemperature(dateComp.hour, minutes: dateComp.minute)
+            if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+                if tempType == .Day {
+                    return appDelegate.settings.dayTemperature
+                } else {
+                    return appDelegate.settings.nighTemperature
+                }
+            }
         }
 
         return 15

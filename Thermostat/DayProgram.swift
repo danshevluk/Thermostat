@@ -8,42 +8,19 @@
 
 import UIKit
 
-enum SwitchType: Int {
-    case Day
-    case Night
-}
-
-@objc class Switch: NSObject, NSCoding {
-
-    var hours: Int
-    var minutes: Int
-    var type: SwitchType
-
-    init(hours: Int, minutes: Int, type: SwitchType) {
-        self.hours = hours
-        self.minutes = minutes
-        self.type = type
-        super.init()
-    }
-
-    required init(coder aDecoder: NSCoder) {
-        hours = aDecoder.decodeIntegerForKey("hours")
-        minutes = aDecoder.decodeIntegerForKey("minutes")
-        type = SwitchType(rawValue: aDecoder.decodeIntegerForKey("type"))!
-    }
-
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeInteger(hours, forKey: "hours")
-        aCoder.encodeInteger(minutes, forKey: "minutes")
-        aCoder.encodeInteger(type.rawValue, forKey: "type")
-    }
+enum SwitchIncertStatus: Int {
+    case IdenticalSwitches
+    case AmountLimitaionViolated
+    case DoesNotMakeSence
+    case Ok
+    case Error
 }
 
 @objc class DayProgram: NSObject, NSCoding {
     var switches: [Switch]
 
     override init() {
-        switches = []
+        switches = [Switch()]
         super.init()
     }
 
@@ -57,16 +34,56 @@ enum SwitchType: Int {
         aCoder.encodeObject(switches, forKey: "switches")
     }
 
-    func tryToAddSwitch(tempSwitch: Switch) -> Bool {
+    func tryToAddSwitch(tempSwitch: Switch) -> SwitchIncertStatus {
         if switches.count > 10 {
-            return false
+            return .AmountLimitaionViolated
         }
 
+        for sw in switches {
+            if sw.time == tempSwitch.time {
+                return .IdenticalSwitches
+            }
+        }
         switches.append(tempSwitch)
-        return true
+
+        switches.sort { $0.time < $1.time }
+        if let indexOfNewSwitch = find(switches, tempSwitch) {
+            if indexOfNewSwitch == 0 {
+                fatalError("omg wtf")
+            }
+
+            if switches[indexOfNewSwitch - 1].type == tempSwitch.type {
+                switches.removeAtIndex(indexOfNewSwitch)
+                return .DoesNotMakeSence
+            } else if indexOfNewSwitch != switches.count - 1 &&
+                switches[indexOfNewSwitch + 1].type == tempSwitch.type {
+                switches.removeAtIndex(indexOfNewSwitch + 1)
+                return .Ok
+            }
+        }
+
+        return .Error
     }
 
-    func getTemperatureForHours(hours: Int, minutes: Int) -> Double {
-        return 0
+    func getTemperature(hours: Int, minutes: Int) -> SwitchType {
+        let time = hours * 60 + minutes
+        return getTemperature(time)
+    }
+
+    func getTemperature(time: Int) -> SwitchType {
+        for var i = 0; i < switches.count; i++ {
+            if switches[i].time > time {
+                return switches[i-1].type
+            }
+        }
+
+        return .Night
     }
 }
+
+
+
+
+
+
+
