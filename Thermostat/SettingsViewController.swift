@@ -7,41 +7,60 @@
 //
 
 import UIKit
-import DatePickerCell
+//import DatePickerCell
+import ActionSheetPicker_3_0
 
 class SettingsViewController: UITableViewController {
-    
-    @IBOutlet weak var datePickerCell: DatePickerCell!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        datePickerCell.datePicker.addTarget(self, action: "datePicked:", forControlEvents: UIControlEvents.ValueChanged)
     }
     
     // MARK: - Table view data source
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        // Deselect automatically if the cell is a DatePickerCell
-        if let cell = self.tableView(tableView, cellForRowAtIndexPath: indexPath) as? DatePickerCell {
-            cell.selectedInTableView(tableView)
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        if let cell = tableView.cellForRowAtIndexPath(indexPath),
+            reuseIdentifier = cell.reuseIdentifier {
+                switch reuseIdentifier {
+                case "DayTempPicker", "NightTempPicker":
+                    showDatePicker()
+                case "DatePicker":
+                    showDatePicker()
+                default:
+                    break
+                }
+                showDatePicker()
         }
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        // Get the correct height if the cell is a DatePickerCell
-        if let cell = self.tableView(tableView, cellForRowAtIndexPath: indexPath) as? DatePickerCell {
-            return cell.datePickerHeight()
-        }
+//    private func showTempPicker() {
+//        ActionSheetMultipleStringPicker.showPickerWithTitle("Multiple String Picker", rows: [
+//            ["One", "Two", "A lot"],
+//            ["Many", "Many more", "Infinite"]
+//            ], initialSelection: [2, 2], doneBlock: {
+//                picker, values, indexes in
+//                
+//                println("values = \(values)")
+//                println("indexes = \(indexes)")
+//                println("picker = \(picker)")
+//                return
+//            }, cancelBlock: { ActionMultipleStringCancelBlock in return }, origin: view.superview)
+//    }
+    
+    private func showDatePicker() {
+        var datePicker = ActionSheetDatePicker(title: "Date And Time", datePickerMode: UIDatePickerMode.DateAndTime, selectedDate: NSDate(), doneBlock: {
+            picker, value, index in
+            
+            println("value = \(value)")
+            println("index = \(index)")
+            println("picker = \(picker)")
+            return
+            }, cancelBlock: { ActionStringCancelBlock in return }, origin: view.superview)
+        let secondsInWeek: NSTimeInterval = 7 * 24 * 60 * 60;
+        datePicker.minimumDate = NSDate(timeInterval: -secondsInWeek, sinceDate: NSDate())
+        datePicker.maximumDate = NSDate(timeInterval: secondsInWeek, sinceDate: NSDate())
+        datePicker.minuteInterval = 20
         
-        return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
-    }
-    
-    // MARK: - Observers
-    func datePicked(datePicker: UIDatePicker) {
-        let date = datePicker.date
-        println(date)
-        // Use it later, Luke
+        datePicker.showActionSheetPicker()
     }
     
 }
