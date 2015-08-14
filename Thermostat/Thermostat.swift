@@ -8,7 +8,6 @@
 
 import UIKit
 
-//Thermostat emulator
 class Thermostat: NSObject {
     var currentTemp: Double
     var targetTemp: Double
@@ -21,8 +20,8 @@ class Thermostat: NSObject {
 
         super.init()
 
-        NSTimer.scheduledTimerWithTimeInterval(2, target: self,
-            selector: "timerUpdate", userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(2,
+            target: self, selector: "timerUpdate", userInfo: nil, repeats: true)
     }
 
     func timerUpdate() {

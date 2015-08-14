@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		370B4AE31B7E1234004F69BD /* WeekViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370B4AE21B7E1234004F69BD /* WeekViewController.swift */; };
+		370B4AE51B7E1811004F69BD /* Weekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370B4AE41B7E1811004F69BD /* Weekday.swift */; };
+		370B4AE71B7E1A8D004F69BD /* DayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370B4AE61B7E1A8D004F69BD /* DayViewController.swift */; };
 		377E8CDA1B7A8D8C004C94D7 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377E8CD91B7A8D8C004C94D7 /* SettingsViewController.swift */; };
 		55130A1F15449AE9DA59886F /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4C94F33165B54DDC822D3E /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E90A9D2E1B7BABB7005B512B /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90A9D2D1B7BABB7005B512B /* TimeManager.swift */; };
@@ -34,6 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		370B4AE21B7E1234004F69BD /* WeekViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekViewController.swift; sourceTree = "<group>"; };
+		370B4AE41B7E1811004F69BD /* Weekday.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weekday.swift; sourceTree = "<group>"; };
+		370B4AE61B7E1A8D004F69BD /* DayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayViewController.swift; sourceTree = "<group>"; };
 		377E8CD91B7A8D8C004C94D7 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		CB4C94F33165B54DDC822D3E /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE017274D04EAA5FCAAFDD25 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -115,9 +121,9 @@
 		E987908D1B55B3E300B56D1A /* Thermostat */ = {
 			isa = PBXGroup;
 			children = (
-				E9CD3D601B7A995400545AD5 /* Model */,
-				E9CD3D621B7A996600545AD5 /* Controller */,
-				E9CD3D611B7A995D00545AD5 /* View */,
+				E9CD3D601B7A995400545AD5 /* Models */,
+				E9CD3D621B7A996600545AD5 /* Controllers */,
+				E9CD3D611B7A995D00545AD5 /* Views */,
 				E98790941B55B3E300B56D1A /* Main.storyboard */,
 				E987908E1B55B3E300B56D1A /* Supporting Files */,
 			);
@@ -161,6 +167,7 @@
 				E90A9D2F1B7BB4BB005B512B /* WeekProgram.swift */,
 				E90A9D311B7BB4C7005B512B /* DayProgram.swift */,
 				E90A9D351B7CA634005B512B /* Switch.swift */,
+				370B4AE41B7E1811004F69BD /* Weekday.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -177,6 +184,8 @@
 			children = (
 				E98790921B55B3E300B56D1A /* ViewController.swift */,
 				377E8CD91B7A8D8C004C94D7 /* SettingsViewController.swift */,
+				370B4AE21B7E1234004F69BD /* WeekViewController.swift */,
+				370B4AE61B7E1A8D004F69BD /* DayViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -333,6 +342,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				370B4AE51B7E1811004F69BD /* Weekday.swift in Sources */,
+				370B4AE31B7E1234004F69BD /* WeekViewController.swift in Sources */,
 				E98790931B55B3E300B56D1A /* ViewController.swift in Sources */,
 				E90A9D361B7CA634005B512B /* Switch.swift in Sources */,
 				E90A9D321B7BB4C7005B512B /* DayProgram.swift in Sources */,
@@ -342,6 +353,7 @@
 				E90A9D381B7CB7BE005B512B /* Settings.swift in Sources */,
 				E90A9D301B7BB4BB005B512B /* WeekProgram.swift in Sources */,
 				377E8CDA1B7A8D8C004C94D7 /* SettingsViewController.swift in Sources */,
+				370B4AE71B7E1A8D004F69BD /* DayViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

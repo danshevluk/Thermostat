@@ -8,16 +8,6 @@
 
 import UIKit
 
-enum WeekDay: Int {
-    case Sunday = 1
-    case Monday
-    case Tuesday
-    case Wednesday
-    case Thursday
-    case Friday
-    case Saturday
-}
-
 @objc class WeekProgram: NSObject, NSCoding {
 
     var days: [DayProgram] = []
@@ -32,24 +22,23 @@ enum WeekDay: Int {
     }
 
     required init(coder aDecoder: NSCoder) {
-        println("Decode week")
         days = aDecoder.decodeObjectForKey("days") as! [DayProgram]
 
     }
 
     func encodeWithCoder(aCoder: NSCoder) {
-        println("Encode week")
         aCoder.encodeObject(days, forKey: "days")
     }
 
-    func tryToAddSwitchForDay(tempSwitch: Switch, forDay day: WeekDay) -> SwitchIncertStatus {
+    func tryToAddSwitchForDay(tempSwitch: Switch, forDay day: Weekday) -> SwitchIncertStatus {
         return days[day.rawValue].tryToAddSwitch(tempSwitch)
     }
 
     func getTemperatureForDate(date: NSDate) -> Double {
         let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
         if let dateComp = calendar?.components(.WeekdayCalendarUnit | .HourCalendarUnit | .MinuteCalendarUnit, fromDate: date) {
-            let dayProgram = days[dateComp.weekday]
+            // FIXME: I HAVE NO IDEA WHY THIS WORKS
+            let dayProgram = days[dateComp.weekday - 1]
             let tempType = dayProgram.getTemperature(dateComp.hour, minutes: dateComp.minute)
             if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
                 if tempType == .Day {
