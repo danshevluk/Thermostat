@@ -60,6 +60,8 @@ enum SwitchIncertStatus: Int {
                 switches.removeAtIndex(indexOfNewSwitch + 1)
                 return .Ok
             }
+
+            return .Ok
         }
 
         return .Error
