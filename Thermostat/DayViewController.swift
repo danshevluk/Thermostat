@@ -8,18 +8,22 @@
 
 import UIKit
 
-class DayViewController: UITableViewController {
+class DayViewController: UITableViewController, NewSwitchTableViewControllerDelegate {
     
     let thermostat = Thermostat()
     
     var dayProgram: DayProgram!
     var dayOfTheWeek: Int!
 
+    var copyButtonItem: UIBarButtonItem!
+    var addSwitchButtonItem: UIBarButtonItem!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // TODO: Add more buttons here
-        self.navigationItem.rightBarButtonItems = [self.editButtonItem()]
+        copyButtonItem = UIBarButtonItem(title: "Copy", style: .Plain, target: self, action: "copySwitches:")
+        addSwitchButtonItem = UIBarButtonItem(title: "Add", style: .Plain, target: self, action: "addNewSwitch:")
+        navigationItem.rightBarButtonItems = rightBarButtons()
         
         // Load the program of the selected weekday
         dayProgram = thermostat.program.days[dayOfTheWeek]
@@ -79,41 +83,45 @@ class DayViewController: UITableViewController {
         }
     }
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    override func setEditing(editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        let switchDuration = 0.4
+        UIView.animateWithDuration(switchDuration, animations: { () -> Void in
+            if editing {
+                self.navigationItem.rightBarButtonItems = [self.editButtonItem()]
+            } else {
+                self.navigationItem.rightBarButtonItems = self.rightBarButtons()
+            }
+        })
     }
-    */
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
+    // MARK: - BarButtonItem handlers
 
+    func addNewSwitch(sender: AnyObject) {
+        println("new switch!!")
+        performSegueWithIdentifier("addSwitch", sender: dayProgram)
     }
-    */
 
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
+    func copySwitches(sender: AnyObject) {
+        println("copy switches!")
     }
-    */
 
-    /*
-    // MARK: - Navigation
+    //MARK: - Tools
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    func rightBarButtons() -> [UIBarButtonItem] {
+        return [self.addSwitchButtonItem, self.editButtonItem(), self.copyButtonItem]
+    }
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+        if let destinationNaigationController = segue.destinationViewController as? UINavigationController,
+                program = sender as? DayProgram {
+            let destination = destinationNaigationController.viewControllers.first as! NewSwitchTableViewController
+            destination.dayProgram = program
+            destination.delegate = self
+        }
     }
-    */
 
+    func newSwitch(contoller: NewSwitchTableViewController, didCreateNewSwitch newSwitch: Switch) {
+        tableView.reloadData()
+    }
 }
