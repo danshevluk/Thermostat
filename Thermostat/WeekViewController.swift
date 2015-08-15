@@ -31,9 +31,10 @@ class WeekViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         println("OLOLOLO")
         if let dayViewController = segue.destinationViewController as? DayViewController,
-            let cell = sender as? UITableViewCell,
-            let rowIndexPath = tableView.indexPathForCell(cell) {
+            cell = sender as? UITableViewCell,
+            rowIndexPath = tableView.indexPathForCell(cell) {
                 dayViewController.dayOfTheWeek = rowIndexPath.row
+                dayViewController.navigationItem.title = weekdays[rowIndexPath.row]
         }
     }
     
