@@ -172,28 +172,60 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="g36-E2-P0R" id="QDF-zt-XoD">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start With Daily Mode" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IzR-oS-iIq">
-                                            <rect key="frame" x="8" y="11" width="176" height="22"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Day starts with:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IzR-oS-iIq">
+                                            <rect key="frame" x="16" y="11" width="125" height="22"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hbs-4I-Fm2">
-                                            <rect key="frame" x="543" y="6" width="51" height="31"/>
-                                        </switch>
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="5xN-6R-95U">
+                                            <rect key="frame" x="447" y="8" width="134" height="29"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="134" id="WUv-J2-XWL"/>
+                                            </constraints>
+                                            <segments>
+                                                <segment title="Day"/>
+                                                <segment title="Night"/>
+                                            </segments>
+                                            <connections>
+                                                <action selector="dayStartsControlChanged:" destination="3aU-R4-gmu" eventType="valueChanged" id="JEA-c5-XIT"/>
+                                            </connections>
+                                        </segmentedControl>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="IzR-oS-iIq" firstAttribute="baseline" secondItem="5xN-6R-95U" secondAttribute="baseline" constant="1" id="7ce-02-AIL"/>
                                         <constraint firstAttribute="centerY" secondItem="IzR-oS-iIq" secondAttribute="centerY" id="9qw-f0-tK2"/>
-                                        <constraint firstItem="IzR-oS-iIq" firstAttribute="leading" secondItem="QDF-zt-XoD" secondAttribute="leadingMargin" id="ZPd-Gg-aEi"/>
-                                        <constraint firstAttribute="centerY" secondItem="hbs-4I-Fm2" secondAttribute="centerY" id="aIt-k7-4uQ"/>
-                                        <constraint firstItem="hbs-4I-Fm2" firstAttribute="trailing" secondItem="QDF-zt-XoD" secondAttribute="trailingMargin" id="hoX-8E-OIc"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="5xN-6R-95U" secondAttribute="trailing" constant="11" id="P4U-GJ-eMp"/>
+                                        <constraint firstItem="IzR-oS-iIq" firstAttribute="leading" secondItem="QDF-zt-XoD" secondAttribute="leadingMargin" constant="8" id="ZPd-Gg-aEi"/>
+                                        <constraint firstItem="IzR-oS-iIq" firstAttribute="centerY" secondItem="5xN-6R-95U" secondAttribute="centerY" constant="-0.25" id="ii1-N2-nCh"/>
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SwitchCell" id="qDd-6y-kyJ">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SwitchCell" rowHeight="69" id="qDd-6y-kyJ">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qDd-6y-kyJ" id="hCF-ge-OHu">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="☀️" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Lt-Td-C6d">
+                                            <rect key="frame" x="535" y="12" width="38" height="46"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="38"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0nk-hg-Euo">
+                                            <rect key="frame" x="17" y="21" width="67" height="25"/>
+                                            <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="22"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="7Lt-Td-C6d" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0nk-hg-Euo" secondAttribute="trailing" id="AX4-sI-laf"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="7Lt-Td-C6d" secondAttribute="trailing" constant="19" id="KC2-54-jFl"/>
+                                        <constraint firstItem="0nk-hg-Euo" firstAttribute="leading" secondItem="hCF-ge-OHu" secondAttribute="leadingMargin" constant="9" id="Uji-0I-V56"/>
+                                        <constraint firstAttribute="centerY" secondItem="0nk-hg-Euo" secondAttribute="centerY" constant="1" id="VRd-lw-VIj"/>
+                                        <constraint firstItem="7Lt-Td-C6d" firstAttribute="centerY" secondItem="0nk-hg-Euo" secondAttribute="centerY" constant="0.5" id="sEF-ez-iaa"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>

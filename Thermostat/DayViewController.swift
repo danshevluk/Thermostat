@@ -10,7 +10,7 @@ import UIKit
 
 class DayViewController: UITableViewController, NewSwitchTableViewControllerDelegate {
     
-    let thermostat = Thermostat()
+    let thermostat = Thermostat.sharedInstance
     
     var dayProgram: DayProgram!
     var dayOfTheWeek: Int!
@@ -21,8 +21,10 @@ class DayViewController: UITableViewController, NewSwitchTableViewControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        copyButtonItem = UIBarButtonItem(title: "Copy", style: .Plain, target: self, action: "copySwitches:")
-        addSwitchButtonItem = UIBarButtonItem(title: "Add", style: .Plain, target: self, action: "addNewSwitch:")
+        copyButtonItem = UIBarButtonItem(title: "Copy",
+            style: .Plain, target: self, action: "copySwitches:")
+        addSwitchButtonItem = UIBarButtonItem(barButtonSystemItem: .Add,
+            target: self, action: "addNewSwitch:")
         navigationItem.rightBarButtonItems = rightBarButtons()
         
         // Load the program of the selected weekday
@@ -51,7 +53,20 @@ class DayViewController: UITableViewController, NewSwitchTableViewControllerDele
         if indexPath.section == 0 {
             cell = tableView.dequeueReusableCellWithIdentifier("StartCell", forIndexPath: indexPath) as! UITableViewCell
         } else {
+            let switchModel = dayProgram.switches[indexPath.row]
             cell = tableView.dequeueReusableCellWithIdentifier("SwitchCell", forIndexPath: indexPath) as! UITableViewCell
+
+            let time = switchModel.getHoursMinutes()
+            if let switchTimeLabel = cell.viewWithTag(1) as? UILabel,
+                    tempIndicator = cell.viewWithTag(2) as? UILabel {
+                if switchModel.type == .Day {
+                    switchTimeLabel.text =  formatTimeToString(time)
+                    tempIndicator.text = "☀️"
+                } else {
+                    switchTimeLabel.text = formatTimeToString(time)
+                    tempIndicator.text = "🌙"
+                }
+            }
         }
 
         return cell
@@ -68,7 +83,7 @@ class DayViewController: UITableViewController, NewSwitchTableViewControllerDele
     }
 
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        if indexPath.section == 0 {
+        if indexPath.row == 0 {
             return false
         } else {
             return true
@@ -83,6 +98,17 @@ class DayViewController: UITableViewController, NewSwitchTableViewControllerDele
         }
     }
 
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        if indexPath.row == 0 {
+           let alert = UIAlertController(title: "Warning", message: "For correct thermostat work you should start any day with a day or a night temperature. Check out switcher above.", preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .Cancel, handler: nil))
+            presentViewController(alert, animated: true, completion: nil)
+        } else {
+
+        }
+    }
+
     override func setEditing(editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         let switchDuration = 0.4
@@ -93,6 +119,15 @@ class DayViewController: UITableViewController, NewSwitchTableViewControllerDele
                 self.navigationItem.rightBarButtonItems = self.rightBarButtons()
             }
         })
+    }
+
+    @IBAction func dayStartsControlChanged(sender: AnyObject) {
+        if let control =  sender as? UISegmentedControl {
+            if let type = SwitchType(rawValue: control.selectedSegmentIndex) {
+                dayProgram.changeFirstSwitchType(type)
+                tableView.reloadData()
+            }
+        }
     }
 
     // MARK: - BarButtonItem handlers
@@ -112,6 +147,15 @@ class DayViewController: UITableViewController, NewSwitchTableViewControllerDele
         return [self.addSwitchButtonItem, self.editButtonItem(), self.copyButtonItem]
     }
 
+    func formatTimeToString(time: (hours: Int, minutes: Int)) -> String {
+        let formatedHours = NSString.localizedStringWithFormat("%02d", time.hours) as String
+        let formatedMinutes = NSString.localizedStringWithFormat("%02d", time.minutes) as String
+
+        return formatedHours + ":" + formatedMinutes
+    }
+
+    //MARK: - Navigation
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let destinationNaigationController = segue.destinationViewController as? UINavigationController,
                 program = sender as? DayProgram {
@@ -121,6 +165,7 @@ class DayViewController: UITableViewController, NewSwitchTableViewControllerDele
         }
     }
 
+    //MARK: - NewSwitchTableViewControllerDelegate
     func newSwitch(contoller: NewSwitchTableViewController, didCreateNewSwitch newSwitch: Switch) {
         tableView.reloadData()
     }

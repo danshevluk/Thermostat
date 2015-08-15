@@ -30,6 +30,15 @@ enum SwitchType: Int {
         super.init()
     }
 
+    func getHoursMinutes() -> (hours: Int, minutes: Int) {
+        var hours: Int = time / 60
+        var minutes: Int = time - hours * 60
+
+        return (hours, minutes)
+    }
+
+    //MARK: - NSCoding stuff
+
     required init(coder aDecoder: NSCoder) {
         time = aDecoder.decodeIntegerForKey("time")
         type = SwitchType(rawValue: aDecoder.decodeIntegerForKey("type"))!

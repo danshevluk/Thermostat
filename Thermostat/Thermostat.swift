@@ -9,6 +9,8 @@
 import UIKit
 
 class Thermostat: NSObject {
+
+    static let sharedInstance = Thermostat()
     var currentTemp: Double
     var targetTemp: Double
     var program: WeekProgram

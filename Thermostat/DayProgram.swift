@@ -67,6 +67,18 @@ enum SwitchIncertStatus: Int {
         return .Error
     }
 
+    func changeFirstSwitchType(type: SwitchType) -> Bool {
+        if let firstSwitch = switches.first {
+            firstSwitch.type = type
+            if switches.count > 1 && switches[1].type == type {
+                switches.removeAtIndex(1)
+            }
+            return true
+        }
+
+        return false
+    }
+
     func getTemperature(hours: Int, minutes: Int) -> SwitchType {
         let time = hours * 60 + minutes
         return getTemperature(time)
