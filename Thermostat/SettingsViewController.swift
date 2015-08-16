@@ -28,10 +28,11 @@ class SettingsViewController: UITableViewController {
                 default:
                     break
                 }
-                showDatePicker()
         }
+
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
-    
+
 //    private func showTempPicker() {
 //        ActionSheetMultipleStringPicker.showPickerWithTitle("Multiple String Picker", rows: [
 //            ["One", "Two", "A lot"],
@@ -47,14 +48,19 @@ class SettingsViewController: UITableViewController {
 //    }
     
     private func showDatePicker() {
-        var datePicker = ActionSheetDatePicker(title: "Date And Time", datePickerMode: UIDatePickerMode.DateAndTime, selectedDate: NSDate(), doneBlock: {
-            picker, value, index in
-            
-            println("value = \(value)")
-            println("index = \(index)")
-            println("picker = \(picker)")
-            return
-            }, cancelBlock: { ActionStringCancelBlock in return }, origin: view.superview)
+        var datePicker = ActionSheetDatePicker(title: "Date And Time",
+            datePickerMode: .DateAndTime,
+            selectedDate: NSDate(),
+            doneBlock: {
+                picker, value, index in
+
+                println("value = \(value)")
+                println("index = \(index)")
+                println("picker = \(picker)")
+                return
+            }, cancelBlock: { ActionStringCancelBlock in return },
+            origin: view.superview)
+
         let secondsInWeek: NSTimeInterval = 7 * 24 * 60 * 60;
         datePicker.minimumDate = NSDate(timeInterval: -secondsInWeek, sinceDate: NSDate())
         datePicker.maximumDate = NSDate(timeInterval: secondsInWeek, sinceDate: NSDate())
@@ -62,5 +68,5 @@ class SettingsViewController: UITableViewController {
         
         datePicker.showActionSheetPicker()
     }
-    
+
 }
