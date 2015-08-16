@@ -30,6 +30,32 @@ enum SwitchType: Int {
         super.init()
     }
 
+    func getDate() -> NSDate {
+        return getDateByAddingMinutes(0)
+    }
+
+    func getDateByAddingMinutes(minutes: Int) -> NSDate {
+        let dateComponents = NSDateComponents()
+        let timeComp = getHoursMinutesFromTime(time + minutes)
+        dateComponents.hour = timeComp.hours
+        dateComponents.minute = timeComp.minutes
+
+        return NSCalendar.currentCalendar().dateFromComponents(dateComponents)!
+    }
+
+    func getHoursMinutes() -> (hours: Int, minutes: Int) {
+        return getHoursMinutesFromTime(time)
+    }
+
+    private func getHoursMinutesFromTime(time: Int) -> (hours: Int, minutes: Int) {
+        var hours: Int = time / 60
+        var minutes: Int = time - hours * 60
+
+        return (hours, minutes)
+    }
+
+    //MARK: - NSCoding stuff
+
     required init(coder aDecoder: NSCoder) {
         time = aDecoder.decodeIntegerForKey("time")
         type = SwitchType(rawValue: aDecoder.decodeIntegerForKey("type"))!

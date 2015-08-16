@@ -8,18 +8,24 @@
 
 import UIKit
 
-class DayViewController: UITableViewController {
+class DayViewController: UITableViewController, NewSwitchTableViewControllerDelegate {
     
-    let thermostat = Thermostat()
+    let thermostat = Thermostat.sharedInstance
     
     var dayProgram: DayProgram!
     var dayOfTheWeek: Int!
 
+    var copyButtonItem: UIBarButtonItem!
+    var addSwitchButtonItem: UIBarButtonItem!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // TODO: Add more buttons here
-        self.navigationItem.rightBarButtonItems = [self.editButtonItem()]
+        copyButtonItem = UIBarButtonItem(title: "Copy",
+            style: .Plain, target: self, action: "copySwitches:")
+        addSwitchButtonItem = UIBarButtonItem(barButtonSystemItem: .Add,
+            target: self, action: "addNewSwitch:")
+        navigationItem.rightBarButtonItems = rightBarButtons()
         
         // Load the program of the selected weekday
         dayProgram = thermostat.program.days[dayOfTheWeek]
@@ -45,13 +51,40 @@ class DayViewController: UITableViewController {
         let cell: UITableViewCell
         
         if indexPath.section == 0 {
-            cell = tableView.dequeueReusableCellWithIdentifier("StartCell", forIndexPath: indexPath) as! UITableViewCell
+            cell = tableView.dequeueReusableCellWithIdentifier("StartCell",
+                    forIndexPath: indexPath) as! UITableViewCell
         } else {
-            cell = tableView.dequeueReusableCellWithIdentifier("SwitchCell", forIndexPath: indexPath) as! UITableViewCell
+            let switchModel = dayProgram.switches[indexPath.row]
+            cell = tableView.dequeueReusableCellWithIdentifier("SwitchCell",
+                    forIndexPath: indexPath) as! UITableViewCell
+
+            let time = switchModel.getHoursMinutes()
+            if let switchTimeLabel = cell.viewWithTag(1) as? UILabel,
+                    tempIndicator = cell.viewWithTag(2) as? UILabel {
+                if switchModel.type == .Day {
+                    switchTimeLabel.text =  formatTimeToString(time)
+                    tempIndicator.text = "☀️"
+                } else {
+                    switchTimeLabel.text = formatTimeToString(time)
+                    tempIndicator.text = "🌙"
+                }
+            }
         }
 
         return cell
     }
+
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        let deletedIndexes = dayProgram.deleteSwitchAtIndex(indexPath.row)
+        var indexPaths: [NSIndexPath] = []
+        for i in deletedIndexes {
+            let newIndexPath = NSIndexPath(forRow: i, inSection: indexPath.section)
+            indexPaths.append(newIndexPath)
+        }
+
+        tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Left)
+    }
+
     
     // MARK: - UITableViewDelegate
     
@@ -64,7 +97,7 @@ class DayViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        if indexPath.section == 0 {
+        if indexPath.row == 0 {
             return false
         } else {
             return true
@@ -79,41 +112,78 @@ class DayViewController: UITableViewController {
         }
     }
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        if indexPath.row == 0 {
+           let alert = UIAlertController(title: "Warning", message: "For correct thermostat work you should start any day with a day or a night temperature. Check out switcher above.", preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .Cancel, handler: nil))
+            presentViewController(alert, animated: true, completion: nil)
+        } else {
+
+        }
     }
-    */
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
+    override func setEditing(editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        let switchDuration = 0.4
+        UIView.animateWithDuration(switchDuration, animations: { () -> Void in
+            if editing {
+                self.navigationItem.rightBarButtonItems = [self.editButtonItem()]
+            } else {
+                self.navigationItem.rightBarButtonItems = self.rightBarButtons()
+            }
+        })
     }
-    */
 
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
+    @IBAction func dayStartsControlChanged(sender: AnyObject) {
+        if let control =  sender as? UISegmentedControl {
+            if let type = SwitchType(rawValue: control.selectedSegmentIndex) {
+                dayProgram.changeFirstSwitchType(type)
+                tableView.reloadData()
+            }
+        }
     }
-    */
 
-    /*
-    // MARK: - Navigation
+    // MARK: - BarButtonItem handlers
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    func addNewSwitch(sender: AnyObject) {
+        println("new switch!!")
+        performSegueWithIdentifier("addSwitch", sender: dayProgram)
+    }
+
+    func copySwitches(sender: AnyObject) {
+        println("copy switches!")
+    }
+
+    //MARK: - Tools
+
+    func rightBarButtons() -> [UIBarButtonItem] {
+        return [self.addSwitchButtonItem, self.editButtonItem(), self.copyButtonItem]
+    }
+
+    func formatTimeToString(time: (hours: Int, minutes: Int)) -> String {
+        let formatedHours = NSString.localizedStringWithFormat("%02d", time.hours) as String
+        let formatedMinutes = NSString.localizedStringWithFormat("%02d", time.minutes) as String
+
+        return formatedHours + ":" + formatedMinutes
+    }
+
+    //MARK: - Navigation
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+        if let destinationNaigationController = segue.destinationViewController as? UINavigationController,
+                program = sender as? DayProgram {
+            let destination = destinationNaigationController.viewControllers.first as! NewSwitchTableViewController
+            destination.dayProgram = program
+            destination.delegate = self
+        }
     }
-    */
 
+    //MARK: - NewSwitchTableViewControllerDelegate
+    func newSwitch(contoller: NewSwitchTableViewController, didCreateNewSwitch newSwitch: Switch) {
+        tableView.reloadData()
+        let numberOfRows = tableView.numberOfRowsInSection(1)
+        let indexPath = NSIndexPath(forRow: numberOfRows - 1, inSection: 1)
+        tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: true)
+    }
 }

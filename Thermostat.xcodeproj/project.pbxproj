@@ -24,6 +24,7 @@
 		E98790981B55B3E300B56D1A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E98790971B55B3E300B56D1A /* Images.xcassets */; };
 		E987909B1B55B3E300B56D1A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98790991B55B3E300B56D1A /* LaunchScreen.xib */; };
 		E98790A71B55B3E300B56D1A /* ThermostatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98790A61B55B3E300B56D1A /* ThermostatTests.swift */; };
+		E98CC6251B7E79F7004725F0 /* NewSwitchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98CC6241B7E79F7004725F0 /* NewSwitchTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		E98790A01B55B3E300B56D1A /* ThermostatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThermostatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E98790A51B55B3E300B56D1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E98790A61B55B3E300B56D1A /* ThermostatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThermostatTests.swift; sourceTree = "<group>"; };
+		E98CC6241B7E79F7004725F0 /* NewSwitchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewSwitchTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +188,7 @@
 				377E8CD91B7A8D8C004C94D7 /* SettingsViewController.swift */,
 				370B4AE21B7E1234004F69BD /* WeekViewController.swift */,
 				370B4AE61B7E1A8D004F69BD /* DayViewController.swift */,
+				E98CC6241B7E79F7004725F0 /* NewSwitchTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 				TargetAttributes = {
 					E987908A1B55B3E300B56D1A = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = GG64Z8QPE8;
 					};
 					E987909F1B55B3E300B56D1A = {
 						CreatedOnToolsVersion = 6.4;
@@ -354,6 +358,7 @@
 				E90A9D301B7BB4BB005B512B /* WeekProgram.swift in Sources */,
 				377E8CDA1B7A8D8C004C94D7 /* SettingsViewController.swift in Sources */,
 				370B4AE71B7E1A8D004F69BD /* DayViewController.swift in Sources */,
+				E98CC6251B7E79F7004725F0 /* NewSwitchTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,9 +486,13 @@
 			baseConfigurationReference = E247900372BAC8599604AFE4 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Thermostat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -492,9 +501,13 @@
 			baseConfigurationReference = CE017274D04EAA5FCAAFDD25 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Thermostat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
