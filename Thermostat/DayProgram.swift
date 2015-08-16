@@ -79,6 +79,19 @@ enum SwitchIncertStatus: Int {
         return false
     }
 
+    func deleteSwitchAtIndex(index: Int) -> [Int] {
+        var deletedIndexes: [Int] = []
+        if index + 1 < switches.count {
+            switches.removeAtIndex(index + 1)
+            deletedIndexes.append(index + 1)
+        }
+
+        deletedIndexes.append(index)
+        switches.removeAtIndex(index)
+
+        return deletedIndexes
+    }
+
     func getTemperature(hours: Int, minutes: Int) -> SwitchType {
         let time = hours * 60 + minutes
         return getTemperature(time)

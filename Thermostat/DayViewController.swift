@@ -51,10 +51,12 @@ class DayViewController: UITableViewController, NewSwitchTableViewControllerDele
         let cell: UITableViewCell
         
         if indexPath.section == 0 {
-            cell = tableView.dequeueReusableCellWithIdentifier("StartCell", forIndexPath: indexPath) as! UITableViewCell
+            cell = tableView.dequeueReusableCellWithIdentifier("StartCell",
+                    forIndexPath: indexPath) as! UITableViewCell
         } else {
             let switchModel = dayProgram.switches[indexPath.row]
-            cell = tableView.dequeueReusableCellWithIdentifier("SwitchCell", forIndexPath: indexPath) as! UITableViewCell
+            cell = tableView.dequeueReusableCellWithIdentifier("SwitchCell",
+                    forIndexPath: indexPath) as! UITableViewCell
 
             let time = switchModel.getHoursMinutes()
             if let switchTimeLabel = cell.viewWithTag(1) as? UILabel,
@@ -71,6 +73,18 @@ class DayViewController: UITableViewController, NewSwitchTableViewControllerDele
 
         return cell
     }
+
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        let deletedIndexes = dayProgram.deleteSwitchAtIndex(indexPath.row)
+        var indexPaths: [NSIndexPath] = []
+        for i in deletedIndexes {
+            let newIndexPath = NSIndexPath(forRow: i, inSection: indexPath.section)
+            indexPaths.append(newIndexPath)
+        }
+
+        tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Left)
+    }
+
     
     // MARK: - UITableViewDelegate
     
@@ -168,5 +182,8 @@ class DayViewController: UITableViewController, NewSwitchTableViewControllerDele
     //MARK: - NewSwitchTableViewControllerDelegate
     func newSwitch(contoller: NewSwitchTableViewController, didCreateNewSwitch newSwitch: Switch) {
         tableView.reloadData()
+        let numberOfRows = tableView.numberOfRowsInSection(1)
+        let indexPath = NSIndexPath(forRow: numberOfRows - 1, inSection: 1)
+        tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: true)
     }
 }

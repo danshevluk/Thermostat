@@ -21,6 +21,15 @@ class NewSwitchTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let lastSwitch = dayProgram?.switches.last {
+            if lastSwitch.type == .Day {
+                switchTypeConrol.selectedSegmentIndex = 1
+            } else {
+                switchTypeConrol.selectedSegmentIndex = 0
+            }
+
+            timePicker.date = lastSwitch.getDateByAddingMinutes(15)
+        }
     }
 
     override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
