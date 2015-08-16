@@ -24,6 +24,8 @@
 		E98790981B55B3E300B56D1A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E98790971B55B3E300B56D1A /* Images.xcassets */; };
 		E987909B1B55B3E300B56D1A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98790991B55B3E300B56D1A /* LaunchScreen.xib */; };
 		E98790A71B55B3E300B56D1A /* ThermostatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98790A61B55B3E300B56D1A /* ThermostatTests.swift */; };
+		E9E8DB591B80EA37005D840C /* CoreActionSheetPicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9E8DB541B80E94A005D840C /* CoreActionSheetPicker.framework */; };
+		E9E8DB5B1B80EA3A005D840C /* CoreActionSheetPicker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E9E8DB541B80E94A005D840C /* CoreActionSheetPicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,7 +36,42 @@
 			remoteGlobalIDString = E987908A1B55B3E300B56D1A;
 			remoteInfo = Thermostat;
 		};
+		E9E8DB531B80E94A005D840C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E9E8DB4E1B80E94A005D840C /* CoreActionSheetPicker.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1CCA90431AE0EFB000368F5E;
+			remoteInfo = CoreActionSheetPicker;
+		};
+		E9E8DB551B80E94A005D840C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E9E8DB4E1B80E94A005D840C /* CoreActionSheetPicker.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1CCA904E1AE0EFB000368F5E;
+			remoteInfo = CoreActionSheetPickerTests;
+		};
+		E9E8DB5C1B80EA3A005D840C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E9E8DB4E1B80E94A005D840C /* CoreActionSheetPicker.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1CCA90421AE0EFB000368F5E;
+			remoteInfo = CoreActionSheetPicker;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E9E8DB5E1B80EA3A005D840C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E9E8DB5B1B80EA3A005D840C /* CoreActionSheetPicker.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		370B4AE21B7E1234004F69BD /* WeekViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +97,7 @@
 		E98790A01B55B3E300B56D1A /* ThermostatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThermostatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E98790A51B55B3E300B56D1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E98790A61B55B3E300B56D1A /* ThermostatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThermostatTests.swift; sourceTree = "<group>"; };
+		E9E8DB4E1B80E94A005D840C /* CoreActionSheetPicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CoreActionSheetPicker.xcodeproj; path = CoreActionSheetPicker/CoreActionSheetPicker.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +106,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55130A1F15449AE9DA59886F /* Pods.framework in Frameworks */,
+				E9E8DB591B80EA37005D840C /* CoreActionSheetPicker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,6 +140,7 @@
 		E98790821B55B3E300B56D1A = {
 			isa = PBXGroup;
 			children = (
+				E9E8DB4E1B80E94A005D840C /* CoreActionSheetPicker.xcodeproj */,
 				E987908D1B55B3E300B56D1A /* Thermostat */,
 				E98790A31B55B3E300B56D1A /* ThermostatTests */,
 				E987908C1B55B3E300B56D1A /* Products */,
@@ -190,6 +230,15 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		E9E8DB4F1B80E94A005D840C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E9E8DB541B80E94A005D840C /* CoreActionSheetPicker.framework */,
+				E9E8DB561B80E94A005D840C /* CoreActionSheetPickerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -203,10 +252,12 @@
 				E98790891B55B3E300B56D1A /* Resources */,
 				2D6BE878528DCD9798BAEA94 /* Embed Pods Frameworks */,
 				CE68A4870C94FBDAEE3F2604 /* Copy Pods Resources */,
+				E9E8DB5E1B80EA3A005D840C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				E9E8DB5D1B80EA3A005D840C /* PBXTargetDependency */,
 			);
 			name = Thermostat;
 			productName = Thermostat;
@@ -261,6 +312,12 @@
 			mainGroup = E98790821B55B3E300B56D1A;
 			productRefGroup = E987908C1B55B3E300B56D1A /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = E9E8DB4F1B80E94A005D840C /* Products */;
+					ProjectRef = E9E8DB4E1B80E94A005D840C /* CoreActionSheetPicker.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				E987908A1B55B3E300B56D1A /* Thermostat */,
@@ -268,6 +325,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		E9E8DB541B80E94A005D840C /* CoreActionSheetPicker.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CoreActionSheetPicker.framework;
+			remoteRef = E9E8DB531B80E94A005D840C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E9E8DB561B80E94A005D840C /* CoreActionSheetPickerTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = CoreActionSheetPickerTests.xctest;
+			remoteRef = E9E8DB551B80E94A005D840C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		E98790891B55B3E300B56D1A /* Resources */ = {
@@ -372,6 +446,11 @@
 			isa = PBXTargetDependency;
 			target = E987908A1B55B3E300B56D1A /* Thermostat */;
 			targetProxy = E98790A11B55B3E300B56D1A /* PBXContainerItemProxy */;
+		};
+		E9E8DB5D1B80EA3A005D840C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CoreActionSheetPicker;
+			targetProxy = E9E8DB5C1B80EA3A005D840C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

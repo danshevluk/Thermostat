@@ -8,7 +8,8 @@
 
 import UIKit
 //import DatePickerCell
-import ActionSheetPicker_3_0
+//import ActionSheetPicker_3_0
+import CoreActionSheetPicker
 
 class SettingsViewController: UITableViewController {
 
@@ -22,7 +23,8 @@ class SettingsViewController: UITableViewController {
             reuseIdentifier = cell.reuseIdentifier {
                 switch reuseIdentifier {
                 case "DayTempPicker", "NightTempPicker":
-                    showDatePicker()
+//                    showDatePicker()
+                    showTempPicker()
                 case "DatePicker":
                     showDatePicker()
                 default:
@@ -33,20 +35,20 @@ class SettingsViewController: UITableViewController {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 
-//    private func showTempPicker() {
-//        ActionSheetMultipleStringPicker.showPickerWithTitle("Multiple String Picker", rows: [
-//            ["One", "Two", "A lot"],
-//            ["Many", "Many more", "Infinite"]
-//            ], initialSelection: [2, 2], doneBlock: {
-//                picker, values, indexes in
-//                
-//                println("values = \(values)")
-//                println("indexes = \(indexes)")
-//                println("picker = \(picker)")
-//                return
-//            }, cancelBlock: { ActionMultipleStringCancelBlock in return }, origin: view.superview)
-//    }
-    
+    private func showTempPicker() {
+        ActionSheetMultipleStringPicker.showPickerWithTitle("Multiple String Picker", rows: [
+            ["One", "Two", "A lot"],
+            ["Many", "Many more", "Infinite"]
+            ], initialSelection: [2, 2], doneBlock: {
+                picker, values, indexes in
+                
+                println("values = \(values)")
+                println("indexes = \(indexes)")
+                println("picker = \(picker)")
+                return
+            }, cancelBlock: { ActionMultipleStringCancelBlock in return }, origin: view.superview)
+    }
+
     private func showDatePicker() {
         var datePicker = ActionSheetDatePicker(title: "Date And Time",
             datePickerMode: .DateAndTime,
