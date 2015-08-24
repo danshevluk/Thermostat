@@ -12,7 +12,7 @@ class HomeViewController: UIViewController, TimeManagerObserver, ThermostatObser
 
     @IBOutlet var nextSwitchLabels: [UILabel]!
     @IBOutlet var currentDateLabels: [UILabel]!
-    @IBOutlet weak var temepatureStatusLabel: UILabel!
+    @IBOutlet weak var temperatureStatusLabel: UILabel!
     @IBOutlet weak var targetTemeratureLabel: UILabel!
     @IBOutlet weak var currentTemperatureLabel: UILabel!
     @IBOutlet weak var temperatureStepper: UIStepper!
@@ -49,6 +49,17 @@ class HomeViewController: UIViewController, TimeManagerObserver, ThermostatObser
         currentTemperatureLabel.text = "\(Thermostat.sharedInstance.currentTemp)"
     }
 
+    func updateTemperatureStatus() {
+        let settings = (UIApplication.sharedApplication().delegate as! AppDelegate).settings
+        if Thermostat.sharedInstance.targetTemp == settings.dayTemperature {
+            temperatureStatusLabel.text = "☀️"
+        } else if Thermostat.sharedInstance.targetTemp == settings.nighTemperature {
+            temperatureStatusLabel.text = "🌙"
+        } else {
+            temperatureStatusLabel.text = ""
+        }
+    }
+
     @IBAction func changeTemperature(sender: AnyObject) {
         if let stepper = sender as? UIStepper {
             //dirty hack again
@@ -56,6 +67,7 @@ class HomeViewController: UIViewController, TimeManagerObserver, ThermostatObser
             Thermostat.sharedInstance.customTarget = true
             Thermostat.sharedInstance.targetTemp = newTarget
             targetTemeratureLabel.text = "\(newTarget)"
+            updateTemperatureStatus()
         }
     }
 
@@ -65,6 +77,7 @@ class HomeViewController: UIViewController, TimeManagerObserver, ThermostatObser
         updateCurrentDateLabels(date)
         updateTemperatureLabels()
         updateNextSwitchLabels(date)
+        updateTemperatureStatus()
     }
 
     //MARK: - ThermostatObserver

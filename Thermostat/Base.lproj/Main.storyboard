@@ -138,7 +138,7 @@
                     <connections>
                         <outlet property="currentTemperatureLabel" destination="iAW-5F-zXT" id="NbF-Qx-DVA"/>
                         <outlet property="targetTemeratureLabel" destination="HYH-fs-0Gq" id="4su-ls-cCA"/>
-                        <outlet property="temepatureStatusLabel" destination="TOG-OL-MZc" id="ZUq-Vg-gBL"/>
+                        <outlet property="temperatureStatusLabel" destination="TOG-OL-MZc" id="Tz5-I8-dNI"/>
                         <outlet property="temperatureStepper" destination="ab1-jo-n5n" id="dFx-SQ-h7v"/>
                         <outletCollection property="nextSwitchLabels" destination="oW9-8I-V19" collectionClass="NSMutableArray" id="QC1-W6-eIY"/>
                         <outletCollection property="currentDateLabels" destination="s5H-xY-D62" collectionClass="NSMutableArray" id="nnC-o5-iQk"/>
