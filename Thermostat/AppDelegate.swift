@@ -19,15 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let timeManager = TimeManager.sharedManager
         let thermostat = Thermostat.sharedInstance
 
-        //unpack saved week program
-        if let weekProgramData = NSUserDefaults.standardUserDefaults().objectForKey("weekProgram") as? NSData {
-            let weekProgram = NSKeyedUnarchiver.unarchiveObjectWithData(weekProgramData) as? WeekProgram
-            Thermostat.sharedInstance.program = weekProgram!
+        if let weekProgram = unarchiveWeekProgram() {
+            Thermostat.sharedInstance.program = weekProgram
         }
 
-        //unpack saved settings
-        if let settingsData = NSUserDefaults.standardUserDefaults().objectForKey("settings") as? NSData {
-            let settings = NSKeyedUnarchiver.unarchiveObjectWithData(settingsData) as! Settings
+        if let settings = unarchiveSettings() {
             self.settings = settings
         }
 
@@ -40,16 +36,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
-        //save weekProgram
-        let weekProgramData = NSKeyedArchiver.archivedDataWithRootObject(Thermostat.sharedInstance.program)
-        NSUserDefaults.standardUserDefaults().setObject(weekProgramData, forKey: "weekProgram")
-
-        //save settings
-        let settingsData = NSKeyedArchiver.archivedDataWithRootObject(self.settings)
-        NSUserDefaults.standardUserDefaults().setObject(settingsData, forKey: "settings")
-
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        saveWeekProgram(Thermostat.sharedInstance.program)
+        saveSettings(settings)
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
@@ -57,17 +45,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        if let weekProgram = unarchiveWeekProgram() {
+            Thermostat.sharedInstance.program = weekProgram
+        }
+
+        if let settings = unarchiveSettings() {
+            self.settings = settings
+        }
     }
 
     func applicationWillTerminate(application: UIApplication) {
-        //save weekProgram
-        let weekProgramData = NSKeyedArchiver.archivedDataWithRootObject(Thermostat.sharedInstance.program)
-        NSUserDefaults.standardUserDefaults().setObject(weekProgramData, forKey: "weekProgram")
+        saveWeekProgram(Thermostat.sharedInstance.program)
+        saveSettings(settings)
+    }
 
-        //save settings
+    func saveSettings(settings: Settings) {
         let settingsData = NSKeyedArchiver.archivedDataWithRootObject(self.settings)
         NSUserDefaults.standardUserDefaults().setObject(settingsData, forKey: "settings")
+    }
+
+    func unarchiveSettings() -> Settings? {
+        if let settingsData = NSUserDefaults.standardUserDefaults().objectForKey("settings") as? NSData {
+            let settings = NSKeyedUnarchiver.unarchiveObjectWithData(settingsData) as? Settings
+            return settings
+        }
+
+        return nil
+    }
+
+    func saveWeekProgram(program: WeekProgram) {
+        let weekProgramData = NSKeyedArchiver.archivedDataWithRootObject(Thermostat.sharedInstance.program)
+        NSUserDefaults.standardUserDefaults().setObject(weekProgramData, forKey: "weekProgram")
+    }
+
+    func unarchiveWeekProgram() -> WeekProgram? {
+        if let weekProgramData = NSUserDefaults.standardUserDefaults().objectForKey("weekProgram") as? NSData {
+            let weekProgram = NSKeyedUnarchiver.unarchiveObjectWithData(weekProgramData) as? WeekProgram
+            return weekProgram
+        }
+
+        return nil
     }
 }
 
