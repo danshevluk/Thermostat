@@ -39,14 +39,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fri, Aug 7" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s5H-xY-D62">
-                                <rect key="frame" x="16" y="28" width="74" height="20.5"/>
+                                <rect key="frame" x="16" y="28" width="74" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next switch" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oW9-8I-V19">
-                                <rect key="frame" x="484" y="28" width="90.5" height="20.5"/>
+                                <rect key="frame" x="484" y="28" width="91" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -56,32 +56,35 @@
                                 <rect key="frame" x="535" y="512" width="51" height="31"/>
                                 <animations/>
                             </switch>
-                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="ab1-jo-n5n">
-                                <rect key="frame" x="150" y="238" width="94" height="29"/>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minimumValue="50" maximumValue="300" translatesAutoresizingMaskIntoConstraints="NO" id="ab1-jo-n5n">
+                                <rect key="frame" x="150" y="237" width="94" height="29"/>
                                 <animations/>
+                                <connections>
+                                    <action selector="changeTemperature:" destination="vXZ-lx-hvc" eventType="valueChanged" id="cak-H6-zgL"/>
+                                </connections>
                             </stepper>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vacation mode" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MNa-C3-K5F">
-                                <rect key="frame" x="16" y="517" width="114.5" height="20.5"/>
+                                <rect key="frame" x="16" y="517" width="115" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23.5" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iAW-5F-zXT">
-                                <rect key="frame" x="16" y="340" width="38.5" height="24"/>
+                                <rect key="frame" x="16" y="340" width="39" height="24"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4:00 PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ff-Bi-aSu">
-                                <rect key="frame" x="16" y="62" width="74" height="20.5"/>
+                                <rect key="frame" x="16" y="62" width="74" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🌙 at 5:00 PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gs8-eg-890">
-                                <rect key="frame" x="473" y="62" width="110.5" height="20.5"/>
+                                <rect key="frame" x="473" y="62" width="111" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -136,6 +139,7 @@
                         <outlet property="currentTemperatureLabel" destination="iAW-5F-zXT" id="NbF-Qx-DVA"/>
                         <outlet property="targetTemeratureLabel" destination="HYH-fs-0Gq" id="4su-ls-cCA"/>
                         <outlet property="temepatureStatusLabel" destination="TOG-OL-MZc" id="ZUq-Vg-gBL"/>
+                        <outlet property="temperatureStepper" destination="ab1-jo-n5n" id="dFx-SQ-h7v"/>
                         <outletCollection property="nextSwitchLabels" destination="oW9-8I-V19" collectionClass="NSMutableArray" id="QC1-W6-eIY"/>
                         <outletCollection property="currentDateLabels" destination="s5H-xY-D62" collectionClass="NSMutableArray" id="nnC-o5-iQk"/>
                         <outletCollection property="currentDateLabels" destination="5Ff-Bi-aSu" collectionClass="NSMutableArray" id="d2L-3P-o1I"/>

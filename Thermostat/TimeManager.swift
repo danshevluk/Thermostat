@@ -12,12 +12,12 @@ protocol TimeManagerObserver: class {
      func timeManager(manager: TimeManager, didUpdateToDate date: NSDate)
 }
 
-class TimeManager: NSObject {
+class TimeManager: NSObject, Observable {
 
     static let sharedManager = TimeManager()
     private var startDate: NSDate
     let multiplier = 300
-    private var observers = [TimeManagerObserver]()
+    internal var observers = [TimeManagerObserver]()
 
     override init() {
         startDate = NSDate()
@@ -59,7 +59,7 @@ class TimeManager: NSObject {
         }
     }
 
-    private func notifyObservers(notify: (observer: TimeManagerObserver) -> Void) {
+    internal func notifyObservers(notify: (observer: TimeManagerObserver) -> Void) {
         for observer in observers {
             notify(observer: observer)
         }
