@@ -258,14 +258,14 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="☀️" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Lt-Td-C6d">
-                                            <rect key="frame" x="535" y="12" width="38" height="46"/>
+                                            <rect key="frame" x="535" y="11" width="38" height="46"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="38"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0nk-hg-Euo">
-                                            <rect key="frame" x="17" y="21" width="67" height="25"/>
-                                            <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="22"/>
+                                            <rect key="frame" x="17" y="20" width="55" height="27"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
