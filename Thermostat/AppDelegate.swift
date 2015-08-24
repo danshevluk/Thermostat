@@ -15,7 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var settings = Settings()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        let timeManager = TimeManager.sharedManager
+        let thermostat = Thermostat.sharedInstance
         return true
     }
 

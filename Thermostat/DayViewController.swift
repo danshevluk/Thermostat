@@ -10,8 +10,6 @@ import UIKit
 
 class DayViewController: UITableViewController, NewSwitchTableViewControllerDelegate {
     
-    let thermostat = Thermostat.sharedInstance
-    
     var dayProgram: DayProgram!
     var dayOfTheWeek: Int!
 
@@ -28,7 +26,7 @@ class DayViewController: UITableViewController, NewSwitchTableViewControllerDele
         navigationItem.rightBarButtonItems = rightBarButtons()
         
         // Load the program of the selected weekday
-        dayProgram = thermostat.program.days[dayOfTheWeek]
+        dayProgram = Thermostat.sharedInstance.program.days[dayOfTheWeek]
     }
 
     // MARK: - Table view data source

@@ -19,7 +19,7 @@
 		E90A9D361B7CA634005B512B /* Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90A9D351B7CA634005B512B /* Switch.swift */; };
 		E90A9D381B7CB7BE005B512B /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90A9D371B7CB7BE005B512B /* Settings.swift */; };
 		E98790911B55B3E300B56D1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98790901B55B3E300B56D1A /* AppDelegate.swift */; };
-		E98790931B55B3E300B56D1A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98790921B55B3E300B56D1A /* ViewController.swift */; };
+		E98790931B55B3E300B56D1A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98790921B55B3E300B56D1A /* HomeViewController.swift */; };
 		E98790961B55B3E300B56D1A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E98790941B55B3E300B56D1A /* Main.storyboard */; };
 		E98790981B55B3E300B56D1A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E98790971B55B3E300B56D1A /* Images.xcassets */; };
 		E987909B1B55B3E300B56D1A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98790991B55B3E300B56D1A /* LaunchScreen.xib */; };
@@ -91,7 +91,7 @@
 		E987908B1B55B3E300B56D1A /* Thermostat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thermostat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E987908F1B55B3E300B56D1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E98790901B55B3E300B56D1A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E98790921B55B3E300B56D1A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E98790921B55B3E300B56D1A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		E98790951B55B3E300B56D1A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E98790971B55B3E300B56D1A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E987909A1B55B3E300B56D1A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -224,7 +224,7 @@
 		E9CD3D621B7A996600545AD5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				E98790921B55B3E300B56D1A /* ViewController.swift */,
+				E98790921B55B3E300B56D1A /* HomeViewController.swift */,
 				377E8CD91B7A8D8C004C94D7 /* SettingsViewController.swift */,
 				370B4AE21B7E1234004F69BD /* WeekViewController.swift */,
 				370B4AE61B7E1A8D004F69BD /* DayViewController.swift */,
@@ -422,7 +422,7 @@
 			files = (
 				370B4AE51B7E1811004F69BD /* Weekday.swift in Sources */,
 				370B4AE31B7E1234004F69BD /* WeekViewController.swift in Sources */,
-				E98790931B55B3E300B56D1A /* ViewController.swift in Sources */,
+				E98790931B55B3E300B56D1A /* HomeViewController.swift in Sources */,
 				E90A9D361B7CA634005B512B /* Switch.swift in Sources */,
 				E90A9D321B7BB4C7005B512B /* DayProgram.swift in Sources */,
 				E98790911B55B3E300B56D1A /* AppDelegate.swift in Sources */,

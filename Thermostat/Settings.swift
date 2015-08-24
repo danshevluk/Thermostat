@@ -12,7 +12,11 @@ import UIKit
 
     var dayTemperature: Double
     var nighTemperature: Double
-    var date: NSDate
+    var date: NSDate {
+        didSet {
+            TimeManager.sharedManager.setStartDate(date)
+        }
+    }
 
     override init() {
         dayTemperature = 21

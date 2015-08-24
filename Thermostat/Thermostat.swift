@@ -8,27 +8,27 @@
 
 import UIKit
 
-class Thermostat: NSObject {
+class Thermostat: TimeManagerObserver {
 
     static let sharedInstance = Thermostat()
     var currentTemp: Double
     var targetTemp: Double
     var program: WeekProgram
 
-    override init() {
+    init() {
         currentTemp = 15
         targetTemp = 15
         program = WeekProgram()
 
-        super.init()
-
-        NSTimer.scheduledTimerWithTimeInterval(2,
-            target: self, selector: "timerUpdate", userInfo: nil, repeats: true)
+        TimeManager.sharedManager.addObserver(self)
     }
 
-    func timerUpdate() {
-        let currentDate = TimeManager.sharedManager.currentDate()
-        targetTemp = program.getTemperatureForDate(currentDate)
+    func timeManager(manager: TimeManager, didUpdateToDate date: NSDate) {
+        targetTemp = program.getTemperatureForDate(date)
+
+        //hello, my name is Dirty Hack
+        targetTemp = Double(round(10 * targetTemp) / 10)
+        currentTemp = Double(round(10 * currentTemp) / 10)
 
         if currentTemp < targetTemp {
             currentTemp += 0.1

@@ -98,13 +98,14 @@ enum SwitchIncertStatus: Int {
     }
 
     func getTemperature(time: Int) -> SwitchType {
+        var switchType = SwitchType.Night
         for var i = 0; i < switches.count; i++ {
-            if switches[i].time > time {
-                return switches[i-1].type
+            if switches[i].time < time {
+                switchType = switches[i].type
             }
         }
 
-        return .Night
+        return switchType
     }
 }
 

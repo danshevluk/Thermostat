@@ -12,7 +12,7 @@ class WeekViewController: UITableViewController {
     
     // TODO: Use enum values (maybe)
     let weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-    
+
     // MARK: - Table view data source
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -29,11 +29,14 @@ class WeekViewController: UITableViewController {
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        println("OLOLOLO")
         if let dayViewController = segue.destinationViewController as? DayViewController,
             cell = sender as? UITableViewCell,
             rowIndexPath = tableView.indexPathForCell(cell) {
-                dayViewController.dayOfTheWeek = rowIndexPath.row
+                if rowIndexPath.row == 6 {
+                    dayViewController.dayOfTheWeek = 0
+                } else {
+                    dayViewController.dayOfTheWeek = rowIndexPath.row + 1
+                }
                 dayViewController.navigationItem.title = weekdays[rowIndexPath.row]
         }
     }

@@ -36,6 +36,7 @@ import UIKit
 
     func getTemperatureForDate(date: NSDate) -> Double {
         let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+
         if let dateComp = calendar?.components(.WeekdayCalendarUnit | .HourCalendarUnit | .MinuteCalendarUnit, fromDate: date) {
             // FIXME: I HAVE NO IDEA WHY THIS WORKS
             let dayProgram = days[dateComp.weekday - 1]
