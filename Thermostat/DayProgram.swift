@@ -25,12 +25,10 @@ enum SwitchIncertStatus: Int {
     }
 
     required init(coder aDecoder: NSCoder) {
-        println("Decode day")
         switches = aDecoder.decodeObjectForKey("switches") as! [Switch]
     }
 
     func encodeWithCoder(aCoder: NSCoder) {
-        println("Encode day")
         aCoder.encodeObject(switches, forKey: "switches")
     }
 

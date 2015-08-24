@@ -15,8 +15,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var settings = Settings()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        // to initialize timers and stuff
         let timeManager = TimeManager.sharedManager
         let thermostat = Thermostat.sharedInstance
+
+        //unpack saved week program
+        if let weekProgramData = NSUserDefaults.standardUserDefaults().objectForKey("weekProgram") as? NSData {
+            let weekProgram = NSKeyedUnarchiver.unarchiveObjectWithData(weekProgramData) as? WeekProgram
+            Thermostat.sharedInstance.program = weekProgram!
+        }
+
         return true
     }
 
@@ -26,6 +34,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
+        let data = NSKeyedArchiver.archivedDataWithRootObject(Thermostat.sharedInstance.program)
+        NSUserDefaults.standardUserDefaults().setObject(data, forKey: "weekProgram")
+
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
@@ -39,7 +50,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        let data = NSKeyedArchiver.archivedDataWithRootObject(Thermostat.sharedInstance.program)
+        NSUserDefaults.standardUserDefaults().setObject(data, forKey: "weekProgram")
     }
 
 
