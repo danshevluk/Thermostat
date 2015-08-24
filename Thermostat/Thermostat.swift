@@ -55,6 +55,11 @@ class Thermostat: TimeManagerObserver, Observable {
         }
     }
 
+    func resetToScedule() {
+        lastTarget = 0
+        timeManager(TimeManager.sharedManager, didUpdateToDate: TimeManager.sharedManager.currentDate())
+    }
+
     //MARK: - Observable
 
     func addObserver(observer: ThermostatObserver) {

@@ -39,14 +39,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fri, Aug 7" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s5H-xY-D62">
-                                <rect key="frame" x="16" y="28" width="74" height="21"/>
+                                <rect key="frame" x="16" y="28" width="74" height="20.5"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next switch" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oW9-8I-V19">
-                                <rect key="frame" x="484" y="28" width="91" height="21"/>
+                                <rect key="frame" x="484" y="28" width="90.5" height="20.5"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -64,27 +64,27 @@
                                 </connections>
                             </stepper>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vacation mode" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MNa-C3-K5F">
-                                <rect key="frame" x="16" y="517" width="115" height="21"/>
+                                <rect key="frame" x="16" y="517" width="114.5" height="20.5"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23.5" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iAW-5F-zXT">
-                                <rect key="frame" x="16" y="340" width="39" height="24"/>
+                                <rect key="frame" x="16" y="340" width="38.5" height="24"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4:00 PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ff-Bi-aSu">
-                                <rect key="frame" x="16" y="62" width="74" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="4:00 PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ff-Bi-aSu">
+                                <rect key="frame" x="16" y="61" width="74" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🌙 at 5:00 PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gs8-eg-890">
-                                <rect key="frame" x="473" y="62" width="111" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="🌙 at 5:00 PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gs8-eg-890">
+                                <rect key="frame" x="473" y="61" width="111" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -95,6 +95,15 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IpQ-A3-6TJ">
+                                <rect key="frame" x="16" y="410" width="124" height="30"/>
+                                <state key="normal" title="Reset to schedule">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetToSchedule:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="CnX-qE-1om"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -117,11 +126,14 @@
                             <constraint firstItem="Gs8-eg-890" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="Zw9-sC-pDk"/>
                             <constraint firstItem="HR3-Gx-c2i" firstAttribute="leading" secondItem="HYH-fs-0Gq" secondAttribute="leading" id="aW5-GL-wyr"/>
                             <constraint firstItem="MNa-C3-K5F" firstAttribute="centerY" secondItem="TPQ-fD-Sv3" secondAttribute="centerY" id="fYu-MS-9U2"/>
+                            <constraint firstItem="IpQ-A3-6TJ" firstAttribute="top" secondItem="iAW-5F-zXT" secondAttribute="bottom" constant="46" id="fk7-HC-pOu"/>
                             <constraint firstItem="HYH-fs-0Gq" firstAttribute="top" secondItem="HR3-Gx-c2i" secondAttribute="bottom" id="frl-Ee-gtc"/>
                             <constraint firstItem="Icw-Gx-qli" firstAttribute="top" secondItem="HYH-fs-0Gq" secondAttribute="bottom" constant="20" id="giY-IA-5Qf"/>
                             <constraint firstItem="s5H-xY-D62" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" id="mDo-f7-a8P"/>
+                            <constraint firstItem="IpQ-A3-6TJ" firstAttribute="leading" secondItem="iAW-5F-zXT" secondAttribute="trailing" constant="-39" id="mXn-dU-Hy0"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="TPQ-fD-Sv3" secondAttribute="bottom" constant="8" id="ner-2P-soV"/>
                             <constraint firstItem="TOG-OL-MZc" firstAttribute="leading" secondItem="HR3-Gx-c2i" secondAttribute="trailing" constant="8" id="nhf-xG-qCT"/>
+                            <constraint firstItem="IpQ-A3-6TJ" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="px6-lU-C8Z"/>
                             <constraint firstItem="s5H-xY-D62" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="qsI-S1-GZ2"/>
                             <constraint firstItem="iAW-5F-zXT" firstAttribute="leading" secondItem="Icw-Gx-qli" secondAttribute="leading" id="t9x-AU-E1X"/>
                             <constraint firstItem="oW9-8I-V19" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" id="yQI-do-Eeh"/>
@@ -131,12 +143,14 @@
                             <mask key="constraints">
                                 <exclude reference="PX0-Jy-o3i"/>
                                 <exclude reference="CnJ-dz-UpU"/>
+                                <exclude reference="mXn-dU-Hy0"/>
                             </mask>
                         </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" id="m26-El-n8u"/>
                     <connections>
                         <outlet property="currentTemperatureLabel" destination="iAW-5F-zXT" id="NbF-Qx-DVA"/>
+                        <outlet property="resetToScheduleButton" destination="IpQ-A3-6TJ" id="j1r-3a-J0Z"/>
                         <outlet property="targetTemeratureLabel" destination="HYH-fs-0Gq" id="4su-ls-cCA"/>
                         <outlet property="temperatureStatusLabel" destination="TOG-OL-MZc" id="Tz5-I8-dNI"/>
                         <outlet property="temperatureStepper" destination="ab1-jo-n5n" id="dFx-SQ-h7v"/>

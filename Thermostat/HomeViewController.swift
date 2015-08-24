@@ -16,6 +16,7 @@ class HomeViewController: UIViewController, TimeManagerObserver, ThermostatObser
     @IBOutlet weak var targetTemeratureLabel: UILabel!
     @IBOutlet weak var currentTemperatureLabel: UILabel!
     @IBOutlet weak var temperatureStepper: UIStepper!
+    @IBOutlet weak var resetToScheduleButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,7 @@ class HomeViewController: UIViewController, TimeManagerObserver, ThermostatObser
         temperatureStepper.maximumValue = 30.0
         temperatureStepper.stepValue = 0.1
         temperatureStepper.value = Thermostat.sharedInstance.targetTemp
+        resetToScheduleButton.hidden = true
     }
 
     func updateCurrentDateLabels(date: NSDate) {
@@ -64,11 +66,16 @@ class HomeViewController: UIViewController, TimeManagerObserver, ThermostatObser
         if let stepper = sender as? UIStepper {
             //dirty hack again
             let newTarget = Double(round(stepper.value * 10) / 10)
+            resetToScheduleButton.hidden = false
             Thermostat.sharedInstance.customTarget = true
             Thermostat.sharedInstance.targetTemp = newTarget
             targetTemeratureLabel.text = "\(newTarget)"
             updateTemperatureStatus()
         }
+    }
+
+    @IBAction func resetToSchedule(sender: AnyObject) {
+        Thermostat.sharedInstance.resetToScedule()
     }
 
     //MARK: - TimeManagerObserver
@@ -84,6 +91,8 @@ class HomeViewController: UIViewController, TimeManagerObserver, ThermostatObser
 
     func thermostat(currentThermostat: Thermostat, didUpdateProgramTargetTemperature temperature: Double) {
         temperatureStepper.value = temperature
+        resetToScheduleButton.hidden = true
+        timeManager(TimeManager.sharedManager, didUpdateToDate: TimeManager.sharedManager.currentDate())
     }
 }
 
