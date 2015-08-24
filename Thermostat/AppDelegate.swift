@@ -25,6 +25,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Thermostat.sharedInstance.program = weekProgram!
         }
 
+        //unpack saved settings
+        if let settingsData = NSUserDefaults.standardUserDefaults().objectForKey("settings") as? NSData {
+            let settings = NSKeyedUnarchiver.unarchiveObjectWithData(settingsData) as! Settings
+            self.settings = settings
+        }
+
         return true
     }
 
@@ -34,8 +40,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
-        let data = NSKeyedArchiver.archivedDataWithRootObject(Thermostat.sharedInstance.program)
-        NSUserDefaults.standardUserDefaults().setObject(data, forKey: "weekProgram")
+        //save weekProgram
+        let weekProgramData = NSKeyedArchiver.archivedDataWithRootObject(Thermostat.sharedInstance.program)
+        NSUserDefaults.standardUserDefaults().setObject(weekProgramData, forKey: "weekProgram")
+
+        //save settings
+        let settingsData = NSKeyedArchiver.archivedDataWithRootObject(self.settings)
+        NSUserDefaults.standardUserDefaults().setObject(settingsData, forKey: "settings")
 
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
@@ -50,10 +61,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(application: UIApplication) {
-        let data = NSKeyedArchiver.archivedDataWithRootObject(Thermostat.sharedInstance.program)
-        NSUserDefaults.standardUserDefaults().setObject(data, forKey: "weekProgram")
+        //save weekProgram
+        let weekProgramData = NSKeyedArchiver.archivedDataWithRootObject(Thermostat.sharedInstance.program)
+        NSUserDefaults.standardUserDefaults().setObject(weekProgramData, forKey: "weekProgram")
+
+        //save settings
+        let settingsData = NSKeyedArchiver.archivedDataWithRootObject(self.settings)
+        NSUserDefaults.standardUserDefaults().setObject(settingsData, forKey: "settings")
     }
-
-
 }
 

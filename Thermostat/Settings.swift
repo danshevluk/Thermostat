@@ -33,7 +33,7 @@ import UIKit
 
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeDouble(dayTemperature, forKey: "day")
-        aCoder.encodeDouble(dayTemperature, forKey: "night")
+        aCoder.encodeDouble(nighTemperature, forKey: "night")
         aCoder.encodeObject(date, forKey: "date")
     }
 }
