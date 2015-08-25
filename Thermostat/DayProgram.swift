@@ -105,11 +105,19 @@ enum SwitchIncertStatus: Int {
 
         return switchType
     }
+
+    func getNextSwitch(#hours: Int, minutes: Int) -> Switch? {
+        let time = hours * 60 + minutes
+        return getNextSwitch(time)
+    }
+
+    private func getNextSwitch(time: Int) -> Switch? {
+        for sw in switches {
+            if time < sw.time {
+                return sw
+            }
+        }
+
+        return nil
+    }
 }
-
-
-
-
-
-
-

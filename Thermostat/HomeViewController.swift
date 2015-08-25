@@ -17,6 +17,7 @@ class HomeViewController: UIViewController, TimeManagerObserver, ThermostatObser
     @IBOutlet weak var currentTemperatureLabel: UILabel!
     @IBOutlet weak var temperatureStepper: UIStepper!
     @IBOutlet weak var resetToScheduleButton: UIButton!
+    @IBOutlet weak var nextSwitchLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,14 +57,33 @@ class HomeViewController: UIViewController, TimeManagerObserver, ThermostatObser
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "EEE, MMM d"
         let timeFormatter = NSDateFormatter()
-        timeFormatter.dateFormat = "hh:mm a"
+        timeFormatter.dateFormat = "HH:mm"
 
         currentDateLabels[0].text = dateFormatter.stringFromDate(date)
         currentDateLabels[1].text = timeFormatter.stringFromDate(date)
     }
 
     func updateNextSwitchLabels(date: NSDate) {
+        if let nextSwitch = Thermostat.sharedInstance.program.getNextSwitch(date) {
+            for label in nextSwitchLabels {
+                label.hidden = false
+            }
+            nextSwitchLabel.text = formatSwitchToString(nextSwitch)
+        } else {
+            for label in nextSwitchLabels {
+                label.hidden = true
+            }
+        }
+    }
 
+    func formatSwitchToString(nextSwitch: Switch) -> String {
+        let time = nextSwitch.getHoursMinutes()
+        let formatedHours = NSString.localizedStringWithFormat("%02d", time.hours) as String
+        let formatedMinutes = NSString.localizedStringWithFormat("%02d", time.minutes) as String
+        let type = nextSwitch.type == .Day ? "☀️" : "🌙"
+        let tomorrow = nextSwitch.time == 0 ? "tomorrow " : ""
+
+        return "\(type) \(tomorrow)at \(formatedHours):\(formatedMinutes)"
     }
 
     func updateTemperatureLabels() {
@@ -75,8 +95,10 @@ class HomeViewController: UIViewController, TimeManagerObserver, ThermostatObser
         let settings = (UIApplication.sharedApplication().delegate as! AppDelegate).settings
         if Thermostat.sharedInstance.targetTemp == settings.dayTemperature {
             temperatureStatusLabel.text = "☀️"
+            resetToScheduleButton.hidden = true
         } else if Thermostat.sharedInstance.targetTemp == settings.nighTemperature {
             temperatureStatusLabel.text = "🌙"
+//            resetToScheduleButton.hidden = true
         } else {
             temperatureStatusLabel.text = ""
         }

@@ -52,4 +52,30 @@ import UIKit
 
         return 15
     }
+
+    func getNextSwitch(date: NSDate) -> Switch? {
+        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+
+        if let dateComp = calendar?.components(.WeekdayCalendarUnit | .HourCalendarUnit | .MinuteCalendarUnit, fromDate: date) {
+            var dayIndex = dateComp.weekday
+            if dayIndex == 6 {
+                dayIndex = 0
+            } else {
+                dayIndex -= 1
+            }
+
+            let dayProgram = days[dayIndex]
+            if let sw  = dayProgram.getNextSwitch(hours: dateComp.hour, minutes: dateComp.minute) {
+                return sw
+            } else {
+                if dayIndex + 1 < days.count {
+                    return days[dayIndex + 1].switches[0]
+                } else {
+                    return days[0].switches[0]
+                }
+            }
+        }
+
+        return nil
+    }
 }

@@ -45,13 +45,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next switch" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oW9-8I-V19">
-                                <rect key="frame" x="484" y="28" width="91" height="21"/>
-                                <animations/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TPQ-fD-Sv3">
                                 <rect key="frame" x="535" y="512" width="51" height="31"/>
                                 <animations/>
@@ -104,6 +97,13 @@
                                     <action selector="resetToSchedule:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="CnX-qE-1om"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next switch" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oW9-8I-V19">
+                                <rect key="frame" x="493" y="28" width="91" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -115,7 +115,7 @@
                             <constraint firstItem="iAW-5F-zXT" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="CnJ-dz-UpU"/>
                             <constraint firstItem="5Ff-Bi-aSu" firstAttribute="top" secondItem="s5H-xY-D62" secondAttribute="bottom" constant="13.5" id="EHl-dm-mp5"/>
                             <constraint firstItem="Icw-Gx-qli" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="EKy-0i-WqI"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="oW9-8I-V19" secondAttribute="trailing" constant="9.5" id="G4c-d2-Tci"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="oW9-8I-V19" secondAttribute="trailing" id="G4c-d2-Tci"/>
                             <constraint firstItem="Icw-Gx-qli" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" constant="20" id="Gnk-yL-VPK"/>
                             <constraint firstItem="HYH-fs-0Gq" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="Ona-IQ-YTI"/>
                             <constraint firstItem="HYH-fs-0Gq" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="PX0-Jy-o3i"/>
@@ -150,6 +150,7 @@
                     <tabBarItem key="tabBarItem" title="Home" id="m26-El-n8u"/>
                     <connections>
                         <outlet property="currentTemperatureLabel" destination="iAW-5F-zXT" id="NbF-Qx-DVA"/>
+                        <outlet property="nextSwitchLabel" destination="Gs8-eg-890" id="W8J-ew-8CW"/>
                         <outlet property="resetToScheduleButton" destination="IpQ-A3-6TJ" id="j1r-3a-J0Z"/>
                         <outlet property="targetTemeratureLabel" destination="HYH-fs-0Gq" id="4su-ls-cCA"/>
                         <outlet property="temperatureStatusLabel" destination="TOG-OL-MZc" id="Tz5-I8-dNI"/>
@@ -157,6 +158,7 @@
                         <outletCollection property="nextSwitchLabels" destination="oW9-8I-V19" collectionClass="NSMutableArray" id="QC1-W6-eIY"/>
                         <outletCollection property="currentDateLabels" destination="s5H-xY-D62" collectionClass="NSMutableArray" id="nnC-o5-iQk"/>
                         <outletCollection property="currentDateLabels" destination="5Ff-Bi-aSu" collectionClass="NSMutableArray" id="d2L-3P-o1I"/>
+                        <outletCollection property="nextSwitchLabels" destination="Gs8-eg-890" collectionClass="NSMutableArray" id="TUu-7f-wXl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -346,6 +348,7 @@
                                                     <date key="date" timeIntervalSinceReferenceDate="461274031.42889702">
                                                         <!--2015-08-14 19:40:31 +0000-->
                                                     </date>
+                                                    <locale key="locale" localeIdentifier="en_NL"/>
                                                 </datePicker>
                                             </subviews>
                                             <constraints>

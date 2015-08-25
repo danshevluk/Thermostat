@@ -44,7 +44,7 @@ class SettingsViewController: UITableViewController {
                 content.text = "\(settings.nighTemperature)"
             case 2:
                 let dateFormatter = NSDateFormatter()
-                dateFormatter.dateFormat = "dd MMM h:mm a"
+                dateFormatter.dateFormat = "dd MMM HH:mm"
                 content.text = dateFormatter.stringFromDate(settings.date)
             default:
                 break
@@ -110,6 +110,7 @@ class SettingsViewController: UITableViewController {
                 self.tableView.reloadData()
             }, cancelBlock: { ActionStringCancelBlock in return },
             origin: view.superview)
+        datePicker.locale = NSLocale(localeIdentifier: "en_NL")
 
 //        let secondsInWeek: NSTimeInterval = 7 * 24 * 60 * 60;
 //        datePicker.minimumDate = NSDate()
