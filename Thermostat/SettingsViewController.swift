@@ -101,7 +101,7 @@ class SettingsViewController: UITableViewController {
     private func showDatePicker() {
         var datePicker = ActionSheetDatePicker(title: "Date And Time",
             datePickerMode: .DateAndTime,
-            selectedDate: NSDate(),
+            selectedDate: settings.date,
             doneBlock: {
                 picker, value, index in
                 if let newDate = value as? NSDate {
@@ -111,10 +111,10 @@ class SettingsViewController: UITableViewController {
             }, cancelBlock: { ActionStringCancelBlock in return },
             origin: view.superview)
 
-        let secondsInWeek: NSTimeInterval = 7 * 24 * 60 * 60;
-        datePicker.minimumDate = NSDate(timeInterval: -secondsInWeek, sinceDate: NSDate())
-        datePicker.maximumDate = NSDate(timeInterval: secondsInWeek, sinceDate: NSDate())
-        datePicker.minuteInterval = 20
+//        let secondsInWeek: NSTimeInterval = 7 * 24 * 60 * 60;
+//        datePicker.minimumDate = NSDate()
+//        datePicker.maximumDate = NSDate(timeInterval: secondsInWeek, sinceDate: NSDate())
+        datePicker.minuteInterval = 10
         
         datePicker.showActionSheetPicker()
     }

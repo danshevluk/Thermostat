@@ -16,11 +16,13 @@ class TimeManager: NSObject, Observable {
 
     static let sharedManager = TimeManager()
     private var startDate: NSDate
+    private var actualStartDate: NSDate
     let multiplier = 300
     internal var observers = [TimeManagerObserver]()
 
     override init() {
         startDate = NSDate()
+        actualStartDate = NSDate()
 
         super.init()
         NSTimer.scheduledTimerWithTimeInterval(0.2,
@@ -35,7 +37,7 @@ class TimeManager: NSObject, Observable {
 
     func currentDate() -> NSDate {
         var realDate = NSDate()
-        let interval = realDate.timeIntervalSinceDate(startDate)
+        let interval = abs(realDate.timeIntervalSinceDate(actualStartDate))
         let multipliedInterval = interval * Double(multiplier)
 
         return NSDate(timeInterval: multipliedInterval, sinceDate: startDate)
@@ -43,6 +45,7 @@ class TimeManager: NSObject, Observable {
 
     func setStartDate(date: NSDate) {
         startDate = date
+        actualStartDate = NSDate()
     }
 
     // Observer pattern
