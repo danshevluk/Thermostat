@@ -32,6 +32,26 @@ class HomeViewController: UIViewController, TimeManagerObserver, ThermostatObser
         resetToScheduleButton.hidden = true
     }
 
+    //MARK: - Buttons tap handlers
+
+    @IBAction func changeTemperature(sender: AnyObject) {
+        if let stepper = sender as? UIStepper {
+            //dirty hack again
+            let newTarget = Double(round(stepper.value * 10) / 10)
+            resetToScheduleButton.hidden = false
+            Thermostat.sharedInstance.customTarget = true
+            Thermostat.sharedInstance.targetTemp = newTarget
+            targetTemeratureLabel.text = "\(newTarget)"
+            updateTemperatureStatus()
+        }
+    }
+
+    @IBAction func resetToSchedule(sender: AnyObject) {
+        Thermostat.sharedInstance.resetToScedule()
+    }
+
+    //MARK: - Update UI
+
     func updateCurrentDateLabels(date: NSDate) {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "EEE, MMM d"
@@ -61,23 +81,6 @@ class HomeViewController: UIViewController, TimeManagerObserver, ThermostatObser
             temperatureStatusLabel.text = ""
         }
     }
-
-    @IBAction func changeTemperature(sender: AnyObject) {
-        if let stepper = sender as? UIStepper {
-            //dirty hack again
-            let newTarget = Double(round(stepper.value * 10) / 10)
-            resetToScheduleButton.hidden = false
-            Thermostat.sharedInstance.customTarget = true
-            Thermostat.sharedInstance.targetTemp = newTarget
-            targetTemeratureLabel.text = "\(newTarget)"
-            updateTemperatureStatus()
-        }
-    }
-
-    @IBAction func resetToSchedule(sender: AnyObject) {
-        Thermostat.sharedInstance.resetToScedule()
-    }
-
     //MARK: - TimeManagerObserver
 
     func timeManager(manager: TimeManager, didUpdateToDate date: NSDate) {

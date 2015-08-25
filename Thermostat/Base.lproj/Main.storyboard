@@ -39,14 +39,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fri, Aug 7" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s5H-xY-D62">
-                                <rect key="frame" x="16" y="28" width="74" height="20.5"/>
+                                <rect key="frame" x="16" y="28" width="74" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next switch" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oW9-8I-V19">
-                                <rect key="frame" x="484" y="28" width="90.5" height="20.5"/>
+                                <rect key="frame" x="484" y="28" width="91" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -64,26 +64,26 @@
                                 </connections>
                             </stepper>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vacation mode" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MNa-C3-K5F">
-                                <rect key="frame" x="16" y="517" width="114.5" height="20.5"/>
+                                <rect key="frame" x="16" y="517" width="115" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23.5" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iAW-5F-zXT">
-                                <rect key="frame" x="16" y="340" width="38.5" height="24"/>
+                                <rect key="frame" x="16" y="340" width="39" height="24"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="4:00 PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ff-Bi-aSu">
-                                <rect key="frame" x="16" y="61" width="74" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4:00 PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ff-Bi-aSu">
+                                <rect key="frame" x="16" y="62" width="74" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="🌙 at 5:00 PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gs8-eg-890">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🌙 at 5:00 PM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gs8-eg-890">
                                 <rect key="frame" x="473" y="61" width="111" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -111,7 +111,7 @@
                             <constraint firstItem="TPQ-fD-Sv3" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="2hg-7d-sit"/>
                             <constraint firstItem="iAW-5F-zXT" firstAttribute="top" secondItem="Icw-Gx-qli" secondAttribute="bottom" constant="8" id="3jg-3G-akD"/>
                             <constraint firstItem="s5H-xY-D62" firstAttribute="centerX" secondItem="5Ff-Bi-aSu" secondAttribute="centerX" id="6CS-QB-SmT"/>
-                            <constraint firstItem="Gs8-eg-890" firstAttribute="top" secondItem="oW9-8I-V19" secondAttribute="bottom" constant="13.5" id="76g-ty-mjQ"/>
+                            <constraint firstItem="Gs8-eg-890" firstAttribute="top" secondItem="oW9-8I-V19" secondAttribute="bottom" constant="12" id="76g-ty-mjQ"/>
                             <constraint firstItem="iAW-5F-zXT" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="CnJ-dz-UpU"/>
                             <constraint firstItem="5Ff-Bi-aSu" firstAttribute="top" secondItem="s5H-xY-D62" secondAttribute="bottom" constant="13.5" id="EHl-dm-mp5"/>
                             <constraint firstItem="Icw-Gx-qli" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="EKy-0i-WqI"/>
