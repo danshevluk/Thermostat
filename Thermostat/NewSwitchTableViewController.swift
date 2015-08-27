@@ -18,10 +18,23 @@ class NewSwitchTableViewController: UITableViewController {
     @IBOutlet weak var switchTypeConrol: UISegmentedControl!
     @IBOutlet weak var timePicker: UIDatePicker!
     var dayProgram: DayProgram?
+    var newSwitch: Switch?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let lastSwitch = dayProgram?.switches.last {
+
+        if let sw = newSwitch {
+            let calendar = NSCalendar.currentCalendar()
+            let components = calendar.components(.HourCalendarUnit | .MinuteCalendarUnit, fromDate: NSDate())
+            let timeComponents = sw.getHoursMinutes()
+            components.minute = timeComponents.minutes
+            components.hour = timeComponents.hours
+            if let date = calendar.dateFromComponents(components) {
+                timePicker.date = date
+            }
+
+            switchTypeConrol.selectedSegmentIndex = sw.type.rawValue
+        } else if let lastSwitch = dayProgram?.switches.last {
             if lastSwitch.type == .Day {
                 switchTypeConrol.selectedSegmentIndex = 1
             } else {
@@ -37,6 +50,17 @@ class NewSwitchTableViewController: UITableViewController {
     }
 
     @IBAction func save(sender: AnyObject) {
+        let tmp = self.newSwitch
+
+        if let sw = self.newSwitch {
+            for var i = 0; i < dayProgram!.switches.count; i++ {
+                if dayProgram!.switches[i] == sw {
+                    dayProgram!.switches.removeAtIndex(i)
+                    break
+                }
+            }
+        }
+
         let calendar = NSCalendar.currentCalendar()
         let dateComp = calendar.components(
             .HourCalendarUnit | .MinuteCalendarUnit, fromDate: timePicker.date)
@@ -48,10 +72,19 @@ class NewSwitchTableViewController: UITableViewController {
                 println("Shit! amount limitation violated")
             case .DoesNotMakeSence:
                 println("Shit! Your switch doesn't make sence")
+                if let oldSwitch = tmp {
+                    program.tryToAddSwitch(oldSwitch)
+                }
             case .Error:
                 println("You dumb")
+                if let oldSwitch = tmp {
+                    program.tryToAddSwitch(oldSwitch)
+                }
             case .IdenticalSwitches:
                 println("Idential switches")
+                if let oldSwitch = tmp {
+                    program.tryToAddSwitch(oldSwitch)
+                }
             case .Ok:
                 if let delegate = self.delegate {
                     delegate.newSwitch(self, didCreateNewSwitch: newSwitch)
@@ -60,6 +93,9 @@ class NewSwitchTableViewController: UITableViewController {
                 dismissViewControllerAnimated(true, completion: nil)
             default:
                 fatalError("You've done somethind really bad")
+                if let oldSwitch = tmp {
+                    program.tryToAddSwitch(oldSwitch)
+                }
             }
         } else {
             println("weekProgram doesn't set")

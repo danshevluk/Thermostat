@@ -117,7 +117,7 @@ class DayViewController: UITableViewController, NewSwitchTableViewControllerDele
             alert.addAction(UIAlertAction(title: "Ok", style: .Cancel, handler: nil))
             presentViewController(alert, animated: true, completion: nil)
         } else {
-
+            performSegueWithIdentifier("addSwitch", sender: dayProgram.switches[indexPath.row])
         }
     }
 
@@ -169,11 +169,18 @@ class DayViewController: UITableViewController, NewSwitchTableViewControllerDele
     //MARK: - Navigation
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let destinationNaigationController = segue.destinationViewController as? UINavigationController,
-                program = sender as? DayProgram {
-            let destination = destinationNaigationController.viewControllers.first as! NewSwitchTableViewController
-            destination.dayProgram = program
+        if let destinationNaigationController = segue.destinationViewController as? UINavigationController {
+            let destination = destinationNaigationController.viewControllers.first
+                as! NewSwitchTableViewController
             destination.delegate = self
+            if let program = sender as? DayProgram {
+                destination.dayProgram = program
+            } else if let sw = sender as? Switch {
+                destination.newSwitch = sw
+
+                //ooops
+                destination.dayProgram = dayProgram
+            }
         }
     }
 
