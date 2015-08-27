@@ -147,7 +147,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Home" id="m26-El-n8u"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="HomeTab" id="m26-El-n8u"/>
                     <connections>
                         <outlet property="currentTemperatureLabel" destination="iAW-5F-zXT" id="NbF-Qx-DVA"/>
                         <outlet property="nextSwitchLabel" destination="Gs8-eg-890" id="W8J-ew-8CW"/>
@@ -550,7 +550,7 @@
         <scene sceneID="z6K-I1-53k">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IXy-dF-GmV" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" id="zif-wR-Iwt"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="SettingsTab" id="zif-wR-Iwt"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="CSJ-q7-cTG">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -570,7 +570,7 @@
         <scene sceneID="x5T-Tc-qZX">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1Tq-5t-MLm" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Schedule" id="qM6-Pm-Djl"/>
+                    <tabBarItem key="tabBarItem" title="Schedule" image="ScheduleTab" id="qM6-Pm-Djl"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="yFZ-dp-j9x">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -605,4 +605,9 @@
             <point key="canvasLocation" x="3118" y="347"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="HomeTab" width="42" height="42"/>
+        <image name="ScheduleTab" width="42" height="42"/>
+        <image name="SettingsTab" width="25" height="25"/>
+    </resources>
 </document>
