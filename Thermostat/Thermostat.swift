@@ -21,6 +21,7 @@ class Thermostat: TimeManagerObserver, Observable {
     var customTarget: Bool = false
     var observers = [ThermostatObserver]()
     private var lastTarget: Double = 0
+    private(set) var vacationMode: Bool = false
 
     init() {
         currentTemp = 15
@@ -31,18 +32,21 @@ class Thermostat: TimeManagerObserver, Observable {
     }
 
     func timeManager(manager: TimeManager, didUpdateToDate date: NSDate) {
-        let newTargetTemp = program.getTemperatureForDate(date)
-        if newTargetTemp != lastTarget {
-            customTarget = false
-            notifyObservers { (observer) -> Void in
-                observer.thermostat(self, didUpdateProgramTargetTemperature: newTargetTemp)
+        if !vacationMode {
+            let newTargetTemp = program.getTemperatureForDate(date)
+            if newTargetTemp != lastTarget {
+                customTarget = false
+                notifyObservers { (observer) -> Void in
+                    observer.thermostat(self, didUpdateProgramTargetTemperature: newTargetTemp)
+                }
+            }
+
+            if !customTarget {
+                targetTemp = newTargetTemp
+                lastTarget = targetTemp
             }
         }
 
-        if !customTarget {
-            targetTemp = newTargetTemp
-            lastTarget = targetTemp
-        }
 
         //hello, my name is Dirty Hack
         targetTemp = Double(round(10 * targetTemp) / 10)
@@ -58,6 +62,19 @@ class Thermostat: TimeManagerObserver, Observable {
     func resetToScedule() {
         lastTarget = 0
         timeManager(TimeManager.sharedManager, didUpdateToDate: TimeManager.sharedManager.currentDate())
+    }
+
+    func setVactionModeOn(on: Bool) {
+        vacationMode = on
+        customTarget = on
+    }
+
+    func getNextSwitch(date: NSDate) -> Switch? {
+        if vacationMode {
+            return nil
+        }
+
+        return program.getNextSwitch(date)
     }
 
     //MARK: - Observable

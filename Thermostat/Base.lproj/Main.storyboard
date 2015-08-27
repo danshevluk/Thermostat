@@ -48,6 +48,9 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TPQ-fD-Sv3">
                                 <rect key="frame" x="535" y="512" width="51" height="31"/>
                                 <animations/>
+                                <connections>
+                                    <action selector="vacationModeSwitchChanged:" destination="vXZ-lx-hvc" eventType="valueChanged" id="BE3-oL-57U"/>
+                                </connections>
                             </switch>
                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minimumValue="50" maximumValue="300" translatesAutoresizingMaskIntoConstraints="NO" id="ab1-jo-n5n">
                                 <rect key="frame" x="150" y="237" width="94" height="29"/>
@@ -155,6 +158,7 @@
                         <outlet property="targetTemeratureLabel" destination="HYH-fs-0Gq" id="4su-ls-cCA"/>
                         <outlet property="temperatureStatusLabel" destination="TOG-OL-MZc" id="Tz5-I8-dNI"/>
                         <outlet property="temperatureStepper" destination="ab1-jo-n5n" id="dFx-SQ-h7v"/>
+                        <outlet property="vacationModeSwitch" destination="TPQ-fD-Sv3" id="owL-RA-ciA"/>
                         <outletCollection property="nextSwitchLabels" destination="oW9-8I-V19" collectionClass="NSMutableArray" id="QC1-W6-eIY"/>
                         <outletCollection property="currentDateLabels" destination="s5H-xY-D62" collectionClass="NSMutableArray" id="nnC-o5-iQk"/>
                         <outletCollection property="currentDateLabels" destination="5Ff-Bi-aSu" collectionClass="NSMutableArray" id="d2L-3P-o1I"/>
@@ -606,8 +610,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="HomeTab" width="42" height="42"/>
-        <image name="ScheduleTab" width="42" height="42"/>
+        <image name="HomeTab" width="25" height="25"/>
+        <image name="ScheduleTab" width="25" height="25"/>
         <image name="SettingsTab" width="25" height="25"/>
     </resources>
 </document>

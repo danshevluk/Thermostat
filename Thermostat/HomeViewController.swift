@@ -18,6 +18,7 @@ class HomeViewController: UIViewController, TimeManagerObserver, ThermostatObser
     @IBOutlet weak var temperatureStepper: UIStepper!
     @IBOutlet weak var resetToScheduleButton: UIButton!
     @IBOutlet weak var nextSwitchLabel: UILabel!
+    @IBOutlet weak var vacationModeSwitch: UISwitch!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,8 @@ class HomeViewController: UIViewController, TimeManagerObserver, ThermostatObser
         temperatureStepper.stepValue = 0.1
         temperatureStepper.value = Thermostat.sharedInstance.targetTemp
         resetToScheduleButton.hidden = true
+
+        vacationModeSwitch.setOn(false, animated: false)
     }
 
     //MARK: - Buttons tap handlers
@@ -39,16 +42,31 @@ class HomeViewController: UIViewController, TimeManagerObserver, ThermostatObser
         if let stepper = sender as? UIStepper {
             //dirty hack again
             let newTarget = Double(round(stepper.value * 10) / 10)
-            resetToScheduleButton.hidden = false
             Thermostat.sharedInstance.customTarget = true
             Thermostat.sharedInstance.targetTemp = newTarget
             targetTemeratureLabel.text = "\(newTarget)"
             updateTemperatureStatus()
+
+            if !Thermostat.sharedInstance.vacationMode {
+                resetToScheduleButton.hidden = false
+            }
         }
     }
 
     @IBAction func resetToSchedule(sender: AnyObject) {
         Thermostat.sharedInstance.resetToScedule()
+    }
+
+    @IBAction func vacationModeSwitchChanged(sender: AnyObject) {
+        if let vacationSwitch = sender as? UISwitch {
+            if vacationSwitch.on {
+                Thermostat.sharedInstance.setVactionModeOn(vacationSwitch.on)
+                resetToScheduleButton.hidden = true
+            } else {
+                Thermostat.sharedInstance.setVactionModeOn(vacationSwitch.on)
+                resetToSchedule(self)
+            }
+        }
     }
 
     //MARK: - Update UI
@@ -64,7 +82,7 @@ class HomeViewController: UIViewController, TimeManagerObserver, ThermostatObser
     }
 
     func updateNextSwitchLabels(date: NSDate) {
-        if let nextSwitch = Thermostat.sharedInstance.program.getNextSwitch(date) {
+        if let nextSwitch = Thermostat.sharedInstance.getNextSwitch(date) {
             for label in nextSwitchLabels {
                 label.hidden = false
             }
@@ -93,12 +111,17 @@ class HomeViewController: UIViewController, TimeManagerObserver, ThermostatObser
 
     func updateTemperatureStatus() {
         let settings = (UIApplication.sharedApplication().delegate as! AppDelegate).settings
+        if Thermostat.sharedInstance.vacationMode {
+            temperatureStatusLabel.text = ""
+            return;
+        }
+
         if Thermostat.sharedInstance.targetTemp == settings.dayTemperature {
             temperatureStatusLabel.text = "☀️"
             resetToScheduleButton.hidden = true
         } else if Thermostat.sharedInstance.targetTemp == settings.nighTemperature {
             temperatureStatusLabel.text = "🌙"
-//            resetToScheduleButton.hidden = true
+            resetToScheduleButton.hidden = true
         } else {
             temperatureStatusLabel.text = ""
         }
