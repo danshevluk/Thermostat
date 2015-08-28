@@ -396,6 +396,66 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection id="Snr-An-bmZ">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="44" id="jid-bq-y4W">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jid-bq-y4W" id="J5b-F5-uXF">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create time interval" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4fK-Mb-3Si">
+                                                    <rect key="frame" x="8" y="12" width="141" height="20"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4qp-Wa-mL5">
+                                                    <rect key="frame" x="543" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="createIntervalSwitchChanged:" destination="bWm-uo-5j2" eventType="valueChanged" id="Ixf-Na-Mgj"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="4fK-Mb-3Si" secondAttribute="centerY" id="Qes-Rl-XoG"/>
+                                                <constraint firstItem="4qp-Wa-mL5" firstAttribute="trailing" secondItem="J5b-F5-uXF" secondAttribute="trailingMargin" id="USg-Kd-vAq"/>
+                                                <constraint firstAttribute="centerY" secondItem="4qp-Wa-mL5" secondAttribute="centerY" constant="0.25" id="YPG-Ge-k3l"/>
+                                                <constraint firstItem="4fK-Mb-3Si" firstAttribute="leading" secondItem="J5b-F5-uXF" secondAttribute="leadingMargin" id="niZ-Ga-FGE"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="IntervalEndPickerCell" rowHeight="194" id="Ovx-cG-ATU">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ovx-cG-ATU" id="7In-Ys-sej">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="NOe-me-6xc">
+                                                    <rect key="frame" x="0.0" y="16" width="600" height="162"/>
+                                                    <date key="date" timeIntervalSinceReferenceDate="461274031.42889702">
+                                                        <!--2015-08-14 19:40:31 +0000-->
+                                                    </date>
+                                                    <locale key="locale" localeIdentifier="en_NL"/>
+                                                </datePicker>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="NOe-me-6xc" secondAttribute="trailing" constant="-8" id="6pb-vj-GON"/>
+                                                <constraint firstItem="NOe-me-6xc" firstAttribute="top" secondItem="7In-Ys-sej" secondAttribute="topMargin" id="94X-gt-bV6"/>
+                                                <constraint firstItem="NOe-me-6xc" firstAttribute="leading" secondItem="7In-Ys-sej" secondAttribute="leadingMargin" constant="-8" id="Q7q-Dz-7gJ"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="NOe-me-6xc" secondAttribute="bottom" id="qri-nJ-173"/>
+                                                <constraint firstItem="NOe-me-6xc" firstAttribute="top" secondItem="7In-Ys-sej" secondAttribute="topMargin" id="xCI-ew-gDQ"/>
+                                                <constraint firstItem="NOe-me-6xc" firstAttribute="top" secondItem="7In-Ys-sej" secondAttribute="topMargin" constant="-8" id="zhy-ce-iU6"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="zhy-ce-iU6"/>
+                                                    <exclude reference="xCI-ew-gDQ"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="bWm-uo-5j2" id="QeD-Vm-akJ"/>
@@ -415,6 +475,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="intervalEndPickerCell" destination="Ovx-cG-ATU" id="tje-FX-FxG"/>
                         <outlet property="switchTypeConrol" destination="Uig-WB-6IQ" id="b0s-fG-5XZ"/>
                         <outlet property="timePicker" destination="cNo-Ut-2Ko" id="Ycp-YY-1mz"/>
                     </connections>

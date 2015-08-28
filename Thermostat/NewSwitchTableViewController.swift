@@ -19,9 +19,13 @@ class NewSwitchTableViewController: UITableViewController {
     @IBOutlet weak var timePicker: UIDatePicker!
     var dayProgram: DayProgram?
     var newSwitch: Switch?
+    @IBOutlet weak var intervalEndPickerCell: UITableViewCell!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+
+        intervalEndPickerCell.hidden = true
 
         if let sw = newSwitch {
             let calendar = NSCalendar.currentCalendar()
@@ -104,5 +108,15 @@ class NewSwitchTableViewController: UITableViewController {
 
     @IBAction func cancel(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
+    }
+
+    @IBAction func createIntervalSwitchChanged(sender: AnyObject) {
+        if let intervalSwitch = sender as? UISwitch {
+            UIView.transitionWithView(intervalEndPickerCell, duration: 0.3,
+                options: UIViewAnimationOptions.TransitionCrossDissolve,
+                animations: { () -> Void in
+                    self.intervalEndPickerCell.hidden = !intervalSwitch.on
+            }, completion: nil)
+        }
     }
 }
