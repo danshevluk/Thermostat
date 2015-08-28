@@ -19,6 +19,8 @@ class NewSwitchTableViewController: UITableViewController {
     @IBOutlet weak var timePicker: UIDatePicker!
     var dayProgram: DayProgram?
     var newSwitch: Switch?
+    @IBOutlet weak var intervalSwitch: UISwitch!
+    @IBOutlet weak var intervalEndTimePicker: UIDatePicker!
     @IBOutlet weak var intervalEndPickerCell: UITableViewCell!
 
     override func viewDidLoad() {
@@ -70,35 +72,59 @@ class NewSwitchTableViewController: UITableViewController {
             .HourCalendarUnit | .MinuteCalendarUnit, fromDate: timePicker.date)
         let switchType = SwitchType(rawValue: switchTypeConrol.selectedSegmentIndex)!
         let newSwitch = Switch(hours: dateComp.hour, minutes: dateComp.minute, type: switchType)
-        if let program = dayProgram {
-            switch program.tryToAddSwitch(newSwitch) {
-            case .AmountLimitaionViolated:
-                println("Shit! amount limitation violated")
-            case .DoesNotMakeSence:
-                println("Shit! Your switch doesn't make sence")
-                if let oldSwitch = tmp {
-                    program.tryToAddSwitch(oldSwitch)
-                }
-            case .Error:
-                println("You dumb")
-                if let oldSwitch = tmp {
-                    program.tryToAddSwitch(oldSwitch)
-                }
-            case .IdenticalSwitches:
-                println("Idential switches")
-                if let oldSwitch = tmp {
-                    program.tryToAddSwitch(oldSwitch)
-                }
-            case .Ok:
-                if let delegate = self.delegate {
-                    delegate.newSwitch(self, didCreateNewSwitch: newSwitch)
-                }
 
-                dismissViewControllerAnimated(true, completion: nil)
-            default:
-                fatalError("You've done somethind really bad")
-                if let oldSwitch = tmp {
-                    program.tryToAddSwitch(oldSwitch)
+        if let program = dayProgram {
+            if intervalSwitch.on {
+                let intervalEndType: SwitchType = switchType == .Day ? .Night : .Day
+                let intervalEndDateComp = calendar.components(
+                    .HourCalendarUnit | .MinuteCalendarUnit, fromDate: intervalEndTimePicker.date)
+                let intervalEnd = Switch(hours: intervalEndDateComp.hour, minutes: intervalEndDateComp.minute, type: intervalEndType)
+
+                switch program.tryToAddInterval(Interval(start: newSwitch, end: intervalEnd)) {
+                case .Error:
+                    println("error!")
+                case .IdenticalSwitches:
+                    println("You can not add identical switches")
+                case .Ok:
+                    if let delegate = self.delegate {
+                        delegate.newSwitch(self, didCreateNewSwitch: newSwitch)
+                    }
+                    dismissViewControllerAnimated(true, completion: nil)
+                case .DoesNotMakeSence:
+                    println("Does not make sence")
+                default:
+                    fatalError("I'm not gonna kill you. I just gonna hurt you. Really, really bad")
+                }
+            } else {
+                switch program.tryToAddSwitch(newSwitch) {
+                case .AmountLimitaionViolated:
+                    println("Shit! amount limitation violated")
+                case .DoesNotMakeSence:
+                    println("Shit! Your switch doesn't make sence")
+                    if let oldSwitch = tmp {
+                        program.tryToAddSwitch(oldSwitch)
+                    }
+                case .Error:
+                    println("You dumb")
+                    if let oldSwitch = tmp {
+                        program.tryToAddSwitch(oldSwitch)
+                    }
+                case .IdenticalSwitches:
+                    println("Idential switches")
+                    if let oldSwitch = tmp {
+                        program.tryToAddSwitch(oldSwitch)
+                    }
+                case .Ok:
+                    if let delegate = self.delegate {
+                        delegate.newSwitch(self, didCreateNewSwitch: newSwitch)
+                    }
+
+                    dismissViewControllerAnimated(true, completion: nil)
+                default:
+                    fatalError("You've done somethind really bad")
+                    if let oldSwitch = tmp {
+                        program.tryToAddSwitch(oldSwitch)
+                    }
                 }
             }
         } else {
@@ -113,10 +139,16 @@ class NewSwitchTableViewController: UITableViewController {
     @IBAction func createIntervalSwitchChanged(sender: AnyObject) {
         if let intervalSwitch = sender as? UISwitch {
             UIView.transitionWithView(intervalEndPickerCell, duration: 0.3,
-                options: UIViewAnimationOptions.TransitionCrossDissolve,
+                options: .TransitionCrossDissolve,
                 animations: { () -> Void in
                     self.intervalEndPickerCell.hidden = !intervalSwitch.on
-            }, completion: nil)
+            }, completion: { (finished) -> Void in
+                if finished {
+                    let indexPath = NSIndexPath(forRow: 1, inSection: 1)
+                    self.tableView.scrollToRowAtIndexPath(indexPath,
+                        atScrollPosition: .Bottom, animated: true)
+                }
+            })
         }
     }
 }

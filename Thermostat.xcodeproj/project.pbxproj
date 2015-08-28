@@ -26,6 +26,7 @@
 		E987909B1B55B3E300B56D1A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98790991B55B3E300B56D1A /* LaunchScreen.xib */; };
 		E98790A71B55B3E300B56D1A /* ThermostatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98790A61B55B3E300B56D1A /* ThermostatTests.swift */; };
 		E98CC6251B7E79F7004725F0 /* NewSwitchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98CC6241B7E79F7004725F0 /* NewSwitchTableViewController.swift */; };
+		E9D566291B909F00001DD7B7 /* Interval.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D566281B909F00001DD7B7 /* Interval.swift */; };
 		E9E8DB591B80EA37005D840C /* CoreActionSheetPicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9E8DB541B80E94A005D840C /* CoreActionSheetPicker.framework */; };
 		E9E8DB5B1B80EA3A005D840C /* CoreActionSheetPicker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E9E8DB541B80E94A005D840C /* CoreActionSheetPicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -101,6 +102,7 @@
 		E98790A51B55B3E300B56D1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E98790A61B55B3E300B56D1A /* ThermostatTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThermostatTests.swift; sourceTree = "<group>"; };
 		E98CC6241B7E79F7004725F0 /* NewSwitchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewSwitchTableViewController.swift; sourceTree = "<group>"; };
+		E9D566281B909F00001DD7B7 /* Interval.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interval.swift; sourceTree = "<group>"; };
 		E9E8DB4E1B80E94A005D840C /* CoreActionSheetPicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CoreActionSheetPicker.xcodeproj; path = CoreActionSheetPicker/CoreActionSheetPicker.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -213,6 +215,7 @@
 				E90A9D351B7CA634005B512B /* Switch.swift */,
 				370B4AE41B7E1811004F69BD /* Weekday.swift */,
 				E914803F1B8BCDE800FC049E /* Observable.swift */,
+				E9D566281B909F00001DD7B7 /* Interval.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 				370B4AE31B7E1234004F69BD /* WeekViewController.swift in Sources */,
 				E98790931B55B3E300B56D1A /* HomeViewController.swift in Sources */,
 				E90A9D361B7CA634005B512B /* Switch.swift in Sources */,
+				E9D566291B909F00001DD7B7 /* Interval.swift in Sources */,
 				E90A9D321B7BB4C7005B512B /* DayProgram.swift in Sources */,
 				E98790911B55B3E300B56D1A /* AppDelegate.swift in Sources */,
 				E90A9D341B7BD469005B512B /* Thermostat.swift in Sources */,

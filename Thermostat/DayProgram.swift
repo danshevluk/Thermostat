@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum SwitchIncertStatus: Int {
+enum SwitchIncertStatus {
     case IdenticalSwitches
     case AmountLimitaionViolated
     case DoesNotMakeSence
@@ -60,6 +60,53 @@ enum SwitchIncertStatus: Int {
             }
 
             return .Ok
+        }
+
+        return .Error
+    }
+
+    func tryToAddInterval(interval: Interval) -> SwitchIncertStatus {
+        if interval.start.time == interval.end.time {
+            return .IdenticalSwitches
+        } else if interval.start.time > interval.end.time ||
+                interval.start.type == interval.end.type {
+            return .Error
+        }
+
+        for sw in switches {
+            if sw.time == interval.start.time  {
+                return .IdenticalSwitches
+            }
+        }
+
+        switches.append(interval.start)
+        switches.sort { $0.time < $1.time }
+
+        if let indexOfNewSwitch = find(switches, interval.start) {
+            if indexOfNewSwitch == 0 {
+                fatalError("omg wtf")
+            }
+
+            if switches[indexOfNewSwitch - 1].type == interval.start.type {
+                switches.removeAtIndex(indexOfNewSwitch)
+                return .DoesNotMakeSence
+            } else {
+                var intervalEndIndex = -1
+                for var i = indexOfNewSwitch + 1; i < switches.count; i++ {
+                    if switches[i].time < interval.end.time {
+                        intervalEndIndex = i
+                    }
+                }
+
+                if intervalEndIndex > 0 {
+                    switches.removeRange(Range(start: indexOfNewSwitch + 1, end: intervalEndIndex+1))
+                }
+
+                switches.append(interval.end)
+                switches.sort { $0.time < $1.time }
+
+                return .Ok
+            }
         }
 
         return .Error
