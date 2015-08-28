@@ -18,6 +18,11 @@ class SettingsViewController: UITableViewController {
         settings = (UIApplication.sharedApplication().delegate as! AppDelegate).settings
     }
 
+    override func viewDidDisappear(animated: Bool) {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.saveSettings(appDelegate.settings)
+    }
+
     func createTemperaturePickerRows() -> [[String]] {
         var firstNumberStrings: [String] = []
         var secondNumberStrings: [String] = []

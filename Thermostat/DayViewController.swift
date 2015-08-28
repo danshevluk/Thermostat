@@ -29,6 +29,11 @@ class DayViewController: UITableViewController, NewSwitchTableViewControllerDele
         dayProgram = Thermostat.sharedInstance.program.days[dayOfTheWeek]
     }
 
+    override func viewWillDisappear(animated: Bool) {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.saveWeekProgram(Thermostat.sharedInstance.program)
+    }
+
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
