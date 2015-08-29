@@ -12,42 +12,55 @@ protocol NewSwitchTableViewControllerDelegate: NSObjectProtocol {
     func newSwitch(contoller: NewSwitchTableViewController, didCreateNewSwitch newSwitch: Switch)
 }
 
+enum NewSwitchTableViewControllerState {
+    case Edit
+    case Create
+}
+
 class NewSwitchTableViewController: UITableViewController {
 
     var delegate: NewSwitchTableViewControllerDelegate?
     @IBOutlet weak var switchTypeConrol: UISegmentedControl!
     @IBOutlet weak var timePicker: UIDatePicker!
-    var dayProgram: DayProgram?
-    var newSwitch: Switch?
     @IBOutlet weak var intervalSwitch: UISwitch!
     @IBOutlet weak var intervalEndTimePicker: UIDatePicker!
     @IBOutlet weak var intervalEndPickerCell: UITableViewCell!
+    @IBOutlet weak var intervalSwitchCell: UITableViewCell!
+    var state: NewSwitchTableViewControllerState!
+    var dayProgram: DayProgram?
+    var newSwitch: Switch?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
         intervalEndPickerCell.hidden = true
+        
+        if state == .Edit {
+            intervalSwitchCell.hidden = true
+            if let sw = newSwitch {
+                let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+                let components = calendar.components(.HourCalendarUnit | .MinuteCalendarUnit, fromDate: NSDate())
+                let timeComponents = sw.getHoursMinutes()
+                components.minute = timeComponents.minutes
+                components.hour = timeComponents.hours
+                if let date = calendar.dateFromComponents(components) {
+                    timePicker.date = date
+                    intervalEndTimePicker.date = date.dateByAddingTimeInterval(60 * 60)
+                }
 
-        if let sw = newSwitch {
-            let calendar = NSCalendar.currentCalendar()
-            let components = calendar.components(.HourCalendarUnit | .MinuteCalendarUnit, fromDate: NSDate())
-            let timeComponents = sw.getHoursMinutes()
-            components.minute = timeComponents.minutes
-            components.hour = timeComponents.hours
-            if let date = calendar.dateFromComponents(components) {
-                timePicker.date = date
+                switchTypeConrol.selectedSegmentIndex = sw.type.rawValue
             }
+        } else if state == .Create {
+            if let lastSwitch = dayProgram?.switches.last {
+                if lastSwitch.type == .Day {
+                    switchTypeConrol.selectedSegmentIndex = 1
+                } else {
+                    switchTypeConrol.selectedSegmentIndex = 0
+                }
 
-            switchTypeConrol.selectedSegmentIndex = sw.type.rawValue
-        } else if let lastSwitch = dayProgram?.switches.last {
-            if lastSwitch.type == .Day {
-                switchTypeConrol.selectedSegmentIndex = 1
-            } else {
-                switchTypeConrol.selectedSegmentIndex = 0
+                timePicker.date = lastSwitch.getDateByAddingMinutes(15)
+                updateIntervalEndTimePickerWithIntervalStartDate(timePicker.date)
             }
-
-            timePicker.date = lastSwitch.getDateByAddingMinutes(15)
         }
     }
 
@@ -134,6 +147,23 @@ class NewSwitchTableViewController: UITableViewController {
 
     @IBAction func cancel(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
+    }
+
+    @IBAction func timePickerValueChanged(sender: AnyObject) {
+        if let picker = sender as? UIDatePicker where state == .Create {
+            updateIntervalEndTimePickerWithIntervalStartDate(picker.date)
+        }
+    }
+
+    func updateIntervalEndTimePickerWithIntervalStartDate(date: NSDate) {
+        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        let components = calendar.components(.HourCalendarUnit | .MinuteCalendarUnit, fromDate: date)
+        if components.hour == 23 {
+            components.minute = 59
+            intervalEndTimePicker.date = calendar.dateFromComponents(components)!
+        } else {
+            intervalEndTimePicker.date = date.dateByAddingTimeInterval(60 * 60)
+        }
     }
 
     @IBAction func createIntervalSwitchChanged(sender: AnyObject) {

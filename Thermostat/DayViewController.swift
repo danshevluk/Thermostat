@@ -150,7 +150,6 @@ class DayViewController: UITableViewController, NewSwitchTableViewControllerDele
     // MARK: - BarButtonItem handlers
 
     func addNewSwitch(sender: AnyObject) {
-        println("new switch!!")
         performSegueWithIdentifier("addSwitch", sender: dayProgram)
     }
 
@@ -178,13 +177,12 @@ class DayViewController: UITableViewController, NewSwitchTableViewControllerDele
             let destination = destinationNaigationController.viewControllers.first
                 as! NewSwitchTableViewController
             destination.delegate = self
-            if let program = sender as? DayProgram {
-                destination.dayProgram = program
-            } else if let sw = sender as? Switch {
+            destination.dayProgram = dayProgram
+            if let sw = sender as? Switch {
+                destination.state = .Edit
                 destination.newSwitch = sw
-
-                //ooops
-                destination.dayProgram = dayProgram
+            } else {
+                destination.state = .Create
             }
         }
     }

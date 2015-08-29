@@ -376,6 +376,9 @@
                                                         <!--2015-08-14 19:40:31 +0000-->
                                                     </date>
                                                     <locale key="locale" localeIdentifier="en_NL"/>
+                                                    <connections>
+                                                        <action selector="timePickerValueChanged:" destination="bWm-uo-5j2" eventType="valueChanged" id="nyY-jW-UWg"/>
+                                                    </connections>
                                                 </datePicker>
                                             </subviews>
                                             <constraints>
@@ -478,6 +481,7 @@
                         <outlet property="intervalEndPickerCell" destination="Ovx-cG-ATU" id="tje-FX-FxG"/>
                         <outlet property="intervalEndTimePicker" destination="NOe-me-6xc" id="6eR-YT-2qd"/>
                         <outlet property="intervalSwitch" destination="4qp-Wa-mL5" id="Tbc-jH-vXe"/>
+                        <outlet property="intervalSwitchCell" destination="jid-bq-y4W" id="Odr-4i-haW"/>
                         <outlet property="switchTypeConrol" destination="Uig-WB-6IQ" id="b0s-fG-5XZ"/>
                         <outlet property="timePicker" destination="cNo-Ut-2Ko" id="Ycp-YY-1mz"/>
                     </connections>
