@@ -20,12 +20,14 @@ enum NewSwitchTableViewControllerState {
 class NewSwitchTableViewController: UITableViewController {
 
     var delegate: NewSwitchTableViewControllerDelegate?
+
     @IBOutlet weak var switchTypeConrol: UISegmentedControl!
     @IBOutlet weak var timePicker: UIDatePicker!
     @IBOutlet weak var intervalSwitch: UISwitch!
     @IBOutlet weak var intervalEndTimePicker: UIDatePicker!
     @IBOutlet weak var intervalEndPickerCell: UITableViewCell!
     @IBOutlet weak var intervalSwitchCell: UITableViewCell!
+    
     var state: NewSwitchTableViewControllerState!
     var dayProgram: DayProgram?
     var newSwitch: Switch?

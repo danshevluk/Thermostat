@@ -154,7 +154,7 @@ class DayViewController: UITableViewController, NewSwitchTableViewControllerDele
     }
 
     func copySwitches(sender: AnyObject) {
-        println("copy switches!")
+        performSegueWithIdentifier("copySchedule", sender: self)
     }
 
     //MARK: - Tools
@@ -173,16 +173,27 @@ class DayViewController: UITableViewController, NewSwitchTableViewControllerDele
     //MARK: - Navigation
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let destinationNaigationController = segue.destinationViewController as? UINavigationController {
-            let destination = destinationNaigationController.viewControllers.first
-                as! NewSwitchTableViewController
-            destination.delegate = self
-            destination.dayProgram = dayProgram
-            if let sw = sender as? Switch {
-                destination.state = .Edit
-                destination.newSwitch = sw
-            } else {
-                destination.state = .Create
+        if let identifier = segue.identifier,
+            nvc = segue.destinationViewController as? UINavigationController {
+            switch identifier {
+            case "addSwitch":
+                if let dvc = nvc.viewControllers.first as? NewSwitchTableViewController {
+                    dvc.delegate = self
+                    dvc.dayProgram = dayProgram
+                    if let aSwitch = sender as? Switch {
+                        dvc.state = .Edit
+                        dvc.newSwitch = aSwitch
+                    } else {
+                        dvc.state = .Create
+                    }
+                }
+            case "copySchedule":
+                if let dvc = nvc.viewControllers.first as? CopyScheduleViewController {
+                    dvc.dayProgram = dayProgram
+                    dvc.dayOfTheWeek = dayOfTheWeek
+                }
+            default:
+                break
             }
         }
     }
