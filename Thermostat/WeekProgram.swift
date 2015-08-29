@@ -11,7 +11,6 @@ import UIKit
 @objc class WeekProgram: NSObject, NSCoding {
 
     var days: [DayProgram] = []
-    var a = 9
 
     override init() {
         for i in 0..<7 {
@@ -57,13 +56,7 @@ import UIKit
         let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
 
         if let dateComp = calendar?.components(.WeekdayCalendarUnit | .HourCalendarUnit | .MinuteCalendarUnit, fromDate: date) {
-            var dayIndex = dateComp.weekday
-            if dayIndex == 6 {
-                dayIndex = 0
-            } else {
-                dayIndex -= 1
-            }
-
+            var dayIndex = dateComp.weekday - 1
             let dayProgram = days[dayIndex]
             if let sw  = dayProgram.getNextSwitch(hours: dateComp.hour, minutes: dateComp.minute) {
                 return sw
