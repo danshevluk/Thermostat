@@ -36,7 +36,7 @@ class NewSwitchTableViewController: UITableViewController {
         super.viewDidLoad()
 
         intervalEndPickerCell.hidden = true
-        
+
         if state == .Edit {
             intervalSwitchCell.hidden = true
             if let sw = newSwitch {
@@ -47,7 +47,6 @@ class NewSwitchTableViewController: UITableViewController {
                 components.hour = timeComponents.hours
                 if let date = calendar.dateFromComponents(components) {
                     timePicker.date = date
-                    intervalEndTimePicker.date = date.dateByAddingTimeInterval(60 * 60)
                 }
 
                 switchTypeConrol.selectedSegmentIndex = sw.type.rawValue
@@ -60,7 +59,7 @@ class NewSwitchTableViewController: UITableViewController {
                     switchTypeConrol.selectedSegmentIndex = 0
                 }
 
-                timePicker.date = lastSwitch.getDateByAddingMinutes(15)
+                timePicker.date = lastSwitch.getDateByAddingMinutes(60)
                 updateIntervalEndTimePickerWithIntervalStartDate(timePicker.date)
             }
         }
@@ -95,11 +94,14 @@ class NewSwitchTableViewController: UITableViewController {
                     .HourCalendarUnit | .MinuteCalendarUnit, fromDate: intervalEndTimePicker.date)
                 let intervalEnd = Switch(hours: intervalEndDateComp.hour, minutes: intervalEndDateComp.minute, type: intervalEndType)
 
+                let alert: UIAlertController
                 switch program.tryToAddInterval(Interval(start: newSwitch, end: intervalEnd)) {
                 case .Error:
-                    println("error!")
+                    showErrorAlertWithMessage("You can't add this interval!")
+                case .AmountLimitaionViolated:
+                    showErrorAlertWithMessage("You can't add more than 10 switches per day")
                 case .IdenticalSwitches:
-                    println("You can not add identical switches")
+                    showErrorAlertWithMessage("One of interval edges matches with another switch.")
                 case .Ok:
                     if let delegate = self.delegate {
                         delegate.newSwitch(self, didCreateNewSwitch: newSwitch)
@@ -107,28 +109,33 @@ class NewSwitchTableViewController: UITableViewController {
                     dismissViewControllerAnimated(true, completion: nil)
                 case .DoesNotMakeSence:
                     println("Does not make sence")
+                    let type = newSwitch.type == .Day ? "day" : "night"
+                    showErrorAlertWithMessage("Begining of your interval does not change temperature at all. It's already \(type) at this time.")
                 default:
                     fatalError("I'm not gonna kill you. I just gonna hurt you. Really, really bad")
                 }
             } else {
+                let alert: UIAlertController
                 switch program.tryToAddSwitch(newSwitch) {
                 case .AmountLimitaionViolated:
-                    println("Shit! amount limitation violated")
+                    showErrorAlertWithMessage("You can't add more than 10 switches per day")
                 case .DoesNotMakeSence:
-                    println("Shit! Your switch doesn't make sence")
                     if let oldSwitch = tmp {
                         program.tryToAddSwitch(oldSwitch)
                     }
+                    let type = newSwitch.type == .Day ? "day" : "night"
+                    showErrorAlertWithMessage("You switch does not change anything. It's alredy \(type) at this time. Change switch type to fix this problem.")
                 case .Error:
-                    println("You dumb")
                     if let oldSwitch = tmp {
                         program.tryToAddSwitch(oldSwitch)
                     }
+                    showErrorAlertWithMessage("You can't create this switch.")
                 case .IdenticalSwitches:
                     println("Idential switches")
                     if let oldSwitch = tmp {
                         program.tryToAddSwitch(oldSwitch)
                     }
+                    showErrorAlertWithMessage("You can't add identical switches.")
                 case .Ok:
                     if let delegate = self.delegate {
                         delegate.newSwitch(self, didCreateNewSwitch: newSwitch)
@@ -137,14 +144,17 @@ class NewSwitchTableViewController: UITableViewController {
                     dismissViewControllerAnimated(true, completion: nil)
                 default:
                     fatalError("You've done somethind really bad")
-                    if let oldSwitch = tmp {
-                        program.tryToAddSwitch(oldSwitch)
-                    }
                 }
             }
         } else {
-            println("weekProgram doesn't set")
+            fatalError("You've done somethind really bad")
         }
+    }
+
+    func showErrorAlertWithMessage(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .Cancel, handler: nil))
+        presentViewController(alert, animated: true, completion: nil)
     }
 
     @IBAction func cancel(sender: AnyObject) {

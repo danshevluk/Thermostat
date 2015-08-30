@@ -33,7 +33,9 @@ enum SwitchIncertStatus {
     }
 
     func tryToAddSwitch(tempSwitch: Switch) -> SwitchIncertStatus {
-        if switches.count > 10 {
+        if switches.first!.type == .Day && switches.count > 10 {
+            return .AmountLimitaionViolated
+        } else if switches.first!.type == .Night && switches.count > 11 {
             return .AmountLimitaionViolated
         }
 
@@ -66,6 +68,12 @@ enum SwitchIncertStatus {
     }
 
     func tryToAddInterval(interval: Interval) -> SwitchIncertStatus {
+        if switches.first!.type == .Day && switches.count > 9 {
+            return .AmountLimitaionViolated
+        } else if switches.first!.type == .Night && switches.count > 10 {
+            return .AmountLimitaionViolated
+        }
+
         if interval.start.time == interval.end.time {
             return .IdenticalSwitches
         } else if interval.start.time > interval.end.time ||

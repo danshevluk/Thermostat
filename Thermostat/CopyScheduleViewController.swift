@@ -55,13 +55,30 @@ class CopyScheduleViewController: UITableViewController {
     }
 
     @IBAction func copySchedule(sender: UIBarButtonItem) {
-        for (index, dayToCopy) in enumerate(daysToCopy) {
-            if dayToCopy == true {
-                let day = index == 6 ? 0 : index + 1
-                Thermostat.sharedInstance.program.days[day] = dayProgram.copy() as! DayProgram
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let okActionHandler = { (_: UIAlertAction!) -> Void in
+            for (index, dayToCopy) in enumerate(self.daysToCopy) {
+                if dayToCopy == true {
+                    let day = index == 6 ? 0 : index + 1
+                    Thermostat.sharedInstance.program.days[day] = self.dayProgram.copy() as! DayProgram
+                }
             }
+            self.dismissViewControllerAnimated(true, completion: nil)
         }
-        dismissViewControllerAnimated(true, completion: nil)
+
+        if appDelegate.settings.showCopyScheduleAlert {
+            let alert = UIAlertController(title: "Warning!", message: "The schedule of all selected days will be replased with this.", preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: okActionHandler))
+            alert.addAction(UIAlertAction(title: "Don't show this again", style: .Default, handler: { (_) -> Void in
+                appDelegate.settings.showCopyScheduleAlert = false
+                okActionHandler(nil)
+            }))
+            presentViewController(alert, animated: true, completion: nil)
+        } else {
+            okActionHandler(nil)
+        }
+
     }
     
     @IBAction func cancel(sender: UIBarButtonItem) {
