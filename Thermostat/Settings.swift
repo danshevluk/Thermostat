@@ -18,10 +18,16 @@ import UIKit
         }
     }
 
+    //alerts
+    var showEditFirstSwitchTypeAlert: Bool
+    var showDeleteSwitchAlert: Bool
+
     override init() {
         dayTemperature = 21
         nighTemperature = 15
         date = NSDate()
+        showEditFirstSwitchTypeAlert = true
+        showDeleteSwitchAlert = true
         super.init()
     }
 
@@ -29,11 +35,15 @@ import UIKit
         dayTemperature = aDecoder.decodeDoubleForKey("day")
         nighTemperature = aDecoder.decodeDoubleForKey("night")
         date = aDecoder.decodeObjectForKey("date") as! NSDate
+        showEditFirstSwitchTypeAlert = aDecoder.decodeBoolForKey("showEditFirstSwitchTypeAlert")
+        showDeleteSwitchAlert = aDecoder.decodeBoolForKey("showEditFirstSwitchTypeAlert")
     }
 
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeDouble(dayTemperature, forKey: "day")
         aCoder.encodeDouble(nighTemperature, forKey: "night")
         aCoder.encodeObject(date, forKey: "date")
+        aCoder.encodeBool(showDeleteSwitchAlert, forKey: "showDeleteSwitchAlert")
+        aCoder.encodeBool(showEditFirstSwitchTypeAlert, forKey: "showEditFirstSwitchTypeAlert")
     }
 }

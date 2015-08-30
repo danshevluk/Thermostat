@@ -15,10 +15,12 @@ class DayViewController: UITableViewController, NewSwitchTableViewControllerDele
 
     var copyButtonItem: UIBarButtonItem!
     var addSwitchButtonItem: UIBarButtonItem!
+    var settings: Settings!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        settings = (UIApplication.sharedApplication().delegate as! AppDelegate).settings
         copyButtonItem = UIBarButtonItem(title: "Copy",
             style: .Plain, target: self, action: "copySwitches:")
         addSwitchButtonItem = UIBarButtonItem(barButtonSystemItem: .Add,
@@ -30,7 +32,12 @@ class DayViewController: UITableViewController, NewSwitchTableViewControllerDele
     }
 
     override func viewWillDisappear(animated: Bool) {
+        saveSettingsAndWeekProgram()
+    }
+
+    func saveSettingsAndWeekProgram() {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.saveSettings(settings)
         appDelegate.saveWeekProgram(Thermostat.sharedInstance.program)
     }
 
@@ -56,6 +63,10 @@ class DayViewController: UITableViewController, NewSwitchTableViewControllerDele
         if indexPath.section == 0 {
             cell = tableView.dequeueReusableCellWithIdentifier("StartCell",
                     forIndexPath: indexPath) as! UITableViewCell
+            if let firstSwitchTypeControl = cell.viewWithTag(2) as? UISegmentedControl,
+                    firstSwitch = dayProgram.switches.first {
+                firstSwitchTypeControl.selectedSegmentIndex = firstSwitch.type.rawValue
+            }
         } else {
             let switchModel = dayProgram.switches[indexPath.row]
             cell = tableView.dequeueReusableCellWithIdentifier("SwitchCell",
@@ -78,17 +89,35 @@ class DayViewController: UITableViewController, NewSwitchTableViewControllerDele
     }
 
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        let deletedIndexes = dayProgram.deleteSwitchAtIndex(indexPath.row)
-        var indexPaths: [NSIndexPath] = []
-        for i in deletedIndexes {
-            let newIndexPath = NSIndexPath(forRow: i, inSection: indexPath.section)
-            indexPaths.append(newIndexPath)
+
+        let alert = UIAlertController(title: "Warning!", message: "Next switch will be joined with the previous one for schedule consistency.", preferredStyle: .Alert)
+
+        let okActionHandler = { (_: UIAlertAction!) -> Void in
+            let deletedIndexes = self.dayProgram.deleteSwitchAtIndex(indexPath.row)
+            var indexPaths: [NSIndexPath] = []
+            for row in deletedIndexes {
+                let newIndexPath = NSIndexPath(forRow: row, inSection: indexPath.section)
+                indexPaths.append(newIndexPath)
+            }
+
+            self.tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Left)
         }
 
-        tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Left)
+        if settings.showDeleteSwitchAlert {
+            alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: okActionHandler))
+            alert.addAction(UIAlertAction(title: "Don't show this again", style: .Default,
+                handler: { (action) -> Void in
+                    self.settings.showDeleteSwitchAlert = false
+                    okActionHandler(action)
+            }))
+            presentViewController(alert, animated: true, completion: nil)
+        }
+        else {
+            okActionHandler(nil)
+        }
     }
 
-    
     // MARK: - UITableViewDelegate
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -141,8 +170,31 @@ class DayViewController: UITableViewController, NewSwitchTableViewControllerDele
     @IBAction func dayStartsControlChanged(sender: AnyObject) {
         if let control =  sender as? UISegmentedControl {
             if let type = SwitchType(rawValue: control.selectedSegmentIndex) {
-                dayProgram.changeFirstSwitchType(type)
-                tableView.reloadData()
+                if dayProgram.switches.count > 1 && settings.showEditFirstSwitchTypeAlert {
+                    let alert = UIAlertController(title: "Warning!",
+                        message: "Second switch will bo joined with the first for consistency.",
+                        preferredStyle: .Alert)
+
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel,
+                        handler: { (_) -> Void in
+                            control.selectedSegmentIndex = type == .Day ? 1 : 0
+                            self.tableView.reloadData()
+                    }))
+
+                    let okActionHandler = { (_: UIAlertAction!) -> Void in
+                        self.dayProgram.changeFirstSwitchType(type)
+                        self.tableView.reloadData()
+                    }
+                    alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: okActionHandler))
+                    alert.addAction(UIAlertAction(title: "Don't show this again", style: .Default, handler: { (action) -> Void in
+                        self.settings.showEditFirstSwitchTypeAlert = false
+                        okActionHandler(action)
+                    }))
+                    presentViewController(alert, animated: true, completion: nil)
+                } else {
+                    dayProgram.changeFirstSwitchType(type)
+                    tableView.reloadData()
+                }
             }
         }
     }
