@@ -22,15 +22,10 @@ import UIKit
 
     required init(coder aDecoder: NSCoder) {
         days = aDecoder.decodeObjectForKey("days") as! [DayProgram]
-
     }
 
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(days, forKey: "days")
-    }
-
-    func tryToAddSwitchForDay(tempSwitch: Switch, forDay day: Weekday) -> SwitchIncertStatus {
-        return days[day.rawValue].tryToAddSwitch(tempSwitch)
     }
 
     func getTemperatureForDate(date: NSDate) -> Double {

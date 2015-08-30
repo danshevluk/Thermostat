@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		370B4AE31B7E1234004F69BD /* WeekViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370B4AE21B7E1234004F69BD /* WeekViewController.swift */; };
-		370B4AE51B7E1811004F69BD /* Weekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370B4AE41B7E1811004F69BD /* Weekday.swift */; };
 		370B4AE71B7E1A8D004F69BD /* DayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370B4AE61B7E1A8D004F69BD /* DayViewController.swift */; };
 		377E8CDA1B7A8D8C004C94D7 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377E8CD91B7A8D8C004C94D7 /* SettingsViewController.swift */; };
 		3786B7241B92336C0084A097 /* CopyScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3786B7231B92336C0084A097 /* CopyScheduleViewController.swift */; };
@@ -79,7 +78,6 @@
 
 /* Begin PBXFileReference section */
 		370B4AE21B7E1234004F69BD /* WeekViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekViewController.swift; sourceTree = "<group>"; };
-		370B4AE41B7E1811004F69BD /* Weekday.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weekday.swift; sourceTree = "<group>"; };
 		370B4AE61B7E1A8D004F69BD /* DayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayViewController.swift; sourceTree = "<group>"; };
 		377E8CD91B7A8D8C004C94D7 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		3786B7231B92336C0084A097 /* CopyScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CopyScheduleViewController.swift; sourceTree = "<group>"; };
@@ -215,7 +213,6 @@
 				E90A9D2F1B7BB4BB005B512B /* WeekProgram.swift */,
 				E90A9D311B7BB4C7005B512B /* DayProgram.swift */,
 				E90A9D351B7CA634005B512B /* Switch.swift */,
-				370B4AE41B7E1811004F69BD /* Weekday.swift */,
 				E914803F1B8BCDE800FC049E /* Observable.swift */,
 				E9D566281B909F00001DD7B7 /* Interval.swift */,
 			);
@@ -429,7 +426,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				370B4AE51B7E1811004F69BD /* Weekday.swift in Sources */,
 				E91480401B8BCDE800FC049E /* Observable.swift in Sources */,
 				370B4AE31B7E1234004F69BD /* WeekViewController.swift in Sources */,
 				E98790931B55B3E300B56D1A /* HomeViewController.swift in Sources */,
