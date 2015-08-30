@@ -13,7 +13,7 @@ enum SwitchType: Int {
     case Night
 }
 
-@objc class Switch: NSObject, NSCoding {
+@objc class Switch: NSObject, NSCoding, NSCopying {
 
     var time: Int
     var type: SwitchType
@@ -64,6 +64,15 @@ enum SwitchType: Int {
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeInteger(time, forKey: "time")
         aCoder.encodeInteger(type.rawValue, forKey: "type")
+    }
+
+    //MARK: - NSCopying
+
+    func copyWithZone(zone: NSZone) -> AnyObject {
+        let time = self.getHoursMinutes()
+        let switchCopy = Switch(hours: time.hours, minutes: time.minutes, type: self.type)
+
+        return switchCopy
     }
 }
 

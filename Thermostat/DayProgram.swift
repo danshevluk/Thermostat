@@ -16,7 +16,7 @@ enum SwitchIncertStatus {
     case Error
 }
 
-@objc class DayProgram: NSObject, NSCoding {
+@objc class DayProgram: NSObject, NSCoding, NSCopying {
     var switches: [Switch]
 
     override init() {
@@ -166,5 +166,17 @@ enum SwitchIncertStatus {
         }
 
         return nil
+    }
+
+    //MARK: - NSCopying
+
+    func copyWithZone(zone: NSZone) -> AnyObject {
+        let programCopy = DayProgram()
+        programCopy.switches.removeAll(keepCapacity: true)
+        for sw in switches {
+            programCopy.switches.append(sw.copy() as! Switch)
+        }
+
+        return programCopy
     }
 }
