@@ -105,7 +105,7 @@ class DayViewController: UITableViewController, NewSwitchTableViewControllerDele
 
         if settings.showDeleteSwitchAlert {
             alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
-            alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: okActionHandler))
+            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: okActionHandler))
             alert.addAction(UIAlertAction(title: "Don't show this again", style: .Default,
                 handler: { (action) -> Void in
                     self.settings.showDeleteSwitchAlert = false
@@ -147,8 +147,8 @@ class DayViewController: UITableViewController, NewSwitchTableViewControllerDele
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if indexPath.row == 0 {
-           let alert = UIAlertController(title: "Warning", message: "For correct thermostat work you should start any day with a day or a night temperature. Check out switcher above.", preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .Cancel, handler: nil))
+           let alert = UIAlertController(title: "Warning", message: "Each day can start with day or night temperature. Use the switcher above.", preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
             presentViewController(alert, animated: true, completion: nil)
         } else {
             performSegueWithIdentifier("addSwitch", sender: dayProgram.switches[indexPath.row])
@@ -172,7 +172,7 @@ class DayViewController: UITableViewController, NewSwitchTableViewControllerDele
             if let type = SwitchType(rawValue: control.selectedSegmentIndex) {
                 if dayProgram.switches.count > 1 && settings.showEditFirstSwitchTypeAlert {
                     let alert = UIAlertController(title: "Warning!",
-                        message: "Second switch will bo joined with the first for consistency.",
+                        message: "Second switch will be joined with the first one for consistency.",
                         preferredStyle: .Alert)
 
                     alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel,
@@ -185,7 +185,7 @@ class DayViewController: UITableViewController, NewSwitchTableViewControllerDele
                         self.dayProgram.changeFirstSwitchType(type)
                         self.tableView.reloadData()
                     }
-                    alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: okActionHandler))
+                    alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: okActionHandler))
                     alert.addAction(UIAlertAction(title: "Don't show this again", style: .Default, handler: { (action) -> Void in
                         self.settings.showEditFirstSwitchTypeAlert = false
                         okActionHandler(action)

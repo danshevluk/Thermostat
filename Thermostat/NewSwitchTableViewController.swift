@@ -97,45 +97,43 @@ class NewSwitchTableViewController: UITableViewController {
                 let alert: UIAlertController
                 switch program.tryToAddInterval(Interval(start: newSwitch, end: intervalEnd)) {
                 case .Error:
-                    showErrorAlertWithMessage("You can't add this interval!")
+                    showErrorAlertWithMessage("The switch is invalid.")
                 case .AmountLimitaionViolated:
-                    showErrorAlertWithMessage("You can't add more than 10 switches per day")
+                    showErrorAlertWithMessage("You cannot add more than 10 switches a day.")
                 case .IdenticalSwitches:
-                    showErrorAlertWithMessage("One of interval edges matches with another switch.")
+                    showErrorAlertWithMessage("The switch is identical to the existing one.")
                 case .Ok:
                     if let delegate = self.delegate {
                         delegate.newSwitch(self, didCreateNewSwitch: newSwitch)
                     }
                     dismissViewControllerAnimated(true, completion: nil)
                 case .DoesNotMakeSence:
-                    println("Does not make sence")
                     let type = newSwitch.type == .Day ? "day" : "night"
-                    showErrorAlertWithMessage("Begining of your interval does not change temperature at all. It's already \(type) at this time.")
+                    showErrorAlertWithMessage("The switch will not have any effect on the temperature. It would already be \(type) by that time.")
                 default:
-                    fatalError("I'm not gonna kill you. I just gonna hurt you. Really, really bad")
+                    fatalError("SOUP")
                 }
             } else {
                 let alert: UIAlertController
                 switch program.tryToAddSwitch(newSwitch) {
                 case .AmountLimitaionViolated:
-                    showErrorAlertWithMessage("You can't add more than 10 switches per day")
+                    showErrorAlertWithMessage("You cannot add more than 10 switches per day.")
                 case .DoesNotMakeSence:
                     if let oldSwitch = tmp {
                         program.tryToAddSwitch(oldSwitch)
                     }
                     let type = newSwitch.type == .Day ? "day" : "night"
-                    showErrorAlertWithMessage("You switch does not change anything. It's alredy \(type) at this time. Change switch type to fix this problem.")
+                    showErrorAlertWithMessage("The switch will not have any effect on the temperature. It would already be \(type) by that time.")
                 case .Error:
                     if let oldSwitch = tmp {
                         program.tryToAddSwitch(oldSwitch)
                     }
-                    showErrorAlertWithMessage("You can't create this switch.")
+                    showErrorAlertWithMessage("The switch is invalid.")
                 case .IdenticalSwitches:
-                    println("Idential switches")
                     if let oldSwitch = tmp {
                         program.tryToAddSwitch(oldSwitch)
                     }
-                    showErrorAlertWithMessage("You can't add identical switches.")
+                    showErrorAlertWithMessage("The switch is identical to the existing one.")
                 case .Ok:
                     if let delegate = self.delegate {
                         delegate.newSwitch(self, didCreateNewSwitch: newSwitch)
@@ -143,17 +141,17 @@ class NewSwitchTableViewController: UITableViewController {
 
                     dismissViewControllerAnimated(true, completion: nil)
                 default:
-                    fatalError("You've done somethind really bad")
+                    fatalError("CROP")
                 }
             }
         } else {
-            fatalError("You've done somethind really bad")
+            fatalError("ALLE")
         }
     }
 
     func showErrorAlertWithMessage(message: String) {
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .Alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .Cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
         presentViewController(alert, animated: true, completion: nil)
     }
 

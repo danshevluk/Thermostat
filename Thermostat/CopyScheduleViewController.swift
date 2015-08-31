@@ -67,9 +67,9 @@ class CopyScheduleViewController: UITableViewController {
         }
 
         if appDelegate.settings.showCopyScheduleAlert {
-            let alert = UIAlertController(title: "Warning!", message: "The schedule of all selected days will be replased with this.", preferredStyle: .Alert)
+            let alert = UIAlertController(title: "Warning!", message: "The schedule of the selected days will be replaced with the current schedule.", preferredStyle: .Alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
-            alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: okActionHandler))
+            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: okActionHandler))
             alert.addAction(UIAlertAction(title: "Don't show this again", style: .Default, handler: { (_) -> Void in
                 appDelegate.settings.showCopyScheduleAlert = false
                 okActionHandler(nil)
