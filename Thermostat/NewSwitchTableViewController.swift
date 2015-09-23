@@ -41,7 +41,7 @@ class NewSwitchTableViewController: UITableViewController {
             intervalSwitchCell.hidden = true
             if let sw = newSwitch {
                 let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-                let components = calendar.components(.HourCalendarUnit | .MinuteCalendarUnit, fromDate: NSDate())
+                let components = calendar.components([.Hour, .Minute], fromDate: NSDate())
                 let timeComponents = sw.getHoursMinutes()
                 components.minute = timeComponents.minutes
                 components.hour = timeComponents.hours
@@ -83,7 +83,7 @@ class NewSwitchTableViewController: UITableViewController {
 
         let calendar = NSCalendar.currentCalendar()
         let dateComp = calendar.components(
-            .HourCalendarUnit | .MinuteCalendarUnit, fromDate: timePicker.date)
+            [.Hour, .Minute], fromDate: timePicker.date)
         let switchType = SwitchType(rawValue: switchTypeConrol.selectedSegmentIndex)!
         let newSwitch = Switch(hours: dateComp.hour, minutes: dateComp.minute, type: switchType)
 
@@ -91,10 +91,9 @@ class NewSwitchTableViewController: UITableViewController {
             if intervalSwitch.on {
                 let intervalEndType: SwitchType = switchType == .Day ? .Night : .Day
                 let intervalEndDateComp = calendar.components(
-                    .HourCalendarUnit | .MinuteCalendarUnit, fromDate: intervalEndTimePicker.date)
+                    [.Hour, .Minute], fromDate: intervalEndTimePicker.date)
                 let intervalEnd = Switch(hours: intervalEndDateComp.hour, minutes: intervalEndDateComp.minute, type: intervalEndType)
 
-                let alert: UIAlertController
                 switch program.tryToAddInterval(Interval(start: newSwitch, end: intervalEnd)) {
                 case .Error:
                     showErrorAlertWithMessage("The switch is invalid.")
@@ -114,7 +113,6 @@ class NewSwitchTableViewController: UITableViewController {
                     fatalError("SOUP")
                 }
             } else {
-                let alert: UIAlertController
                 switch program.tryToAddSwitch(newSwitch) {
                 case .AmountLimitaionViolated:
                     showErrorAlertWithMessage("You cannot add more than 10 switches per day.")
@@ -167,7 +165,7 @@ class NewSwitchTableViewController: UITableViewController {
 
     func updateIntervalEndTimePickerWithIntervalStartDate(date: NSDate) {
         let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-        let components = calendar.components(.HourCalendarUnit | .MinuteCalendarUnit, fromDate: date)
+        let components = calendar.components([.Hour, .Minute], fromDate: date)
         if components.hour == 23 {
             components.minute = 59
             intervalEndTimePicker.date = calendar.dateFromComponents(components)!
@@ -182,13 +180,13 @@ class NewSwitchTableViewController: UITableViewController {
                 options: .TransitionCrossDissolve,
                 animations: { () -> Void in
                     self.intervalEndPickerCell.hidden = !intervalSwitch.on
-            }, completion: { (finished) -> Void in
+            }) { (finished) -> Void in
                 if finished {
                     let indexPath = NSIndexPath(forRow: 1, inSection: 1)
                     self.tableView.scrollToRowAtIndexPath(indexPath,
                         atScrollPosition: .Bottom, animated: true)
                 }
-            })
+            }
         }
     }
 }

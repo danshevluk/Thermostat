@@ -46,8 +46,8 @@ enum SwitchIncertStatus {
         }
         switches.append(tempSwitch)
 
-        switches.sort { $0.time < $1.time }
-        if let indexOfNewSwitch = find(switches, tempSwitch) {
+        switches.sortInPlace { $0.time < $1.time }
+        if let indexOfNewSwitch = switches.indexOf(tempSwitch) {
             if indexOfNewSwitch == 0 {
                 fatalError("omg wtf")
             }
@@ -88,9 +88,9 @@ enum SwitchIncertStatus {
         }
 
         switches.append(interval.start)
-        switches.sort { $0.time < $1.time }
+        switches.sortInPlace { $0.time < $1.time }
 
-        if let indexOfNewSwitch = find(switches, interval.start) {
+        if let indexOfNewSwitch = switches.indexOf(interval.start) {
             if indexOfNewSwitch == 0 {
                 fatalError("omg wtf")
             }
@@ -111,7 +111,7 @@ enum SwitchIncertStatus {
                 }
 
                 switches.append(interval.end)
-                switches.sort { $0.time < $1.time }
+                switches.sortInPlace { $0.time < $1.time }
 
                 return .Ok
             }
@@ -152,25 +152,23 @@ enum SwitchIncertStatus {
 
     func getTemperature(time: Int) -> SwitchType {
         var switchType = SwitchType.Night
-        for var i = 0; i < switches.count; i++ {
-            if switches[i].time < time {
-                switchType = switches[i].type
-            }
+
+        for (index, _) in switches.enumerate()
+            where switches[index].time < time {
+              switchType = switches[index].type
         }
 
         return switchType
     }
 
-    func getNextSwitch(#hours: Int, minutes: Int) -> Switch? {
+    func getNextSwitch(hours hours: Int, minutes: Int) -> Switch? {
         let time = hours * 60 + minutes
         return getNextSwitch(time)
     }
 
     private func getNextSwitch(time: Int) -> Switch? {
-        for sw in switches {
-            if time < sw.time {
-                return sw
-            }
+        for sw in switches where  time < sw.time {
+            return sw
         }
 
         return nil

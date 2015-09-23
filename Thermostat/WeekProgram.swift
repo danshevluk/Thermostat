@@ -13,7 +13,7 @@ import UIKit
     var days: [DayProgram] = []
 
     override init() {
-        for i in 0..<7 {
+        for _ in 0..<7 {
             days.append(DayProgram())
         }
 
@@ -31,7 +31,9 @@ import UIKit
     func getTemperatureForDate(date: NSDate) -> Double {
         let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
 
-        if let dateComp = calendar?.components(.WeekdayCalendarUnit | .HourCalendarUnit | .MinuteCalendarUnit, fromDate: date) {
+
+        if let dateComp = calendar?.components([.Weekday, .Hour, .Minute],
+            fromDate: date) {
             // FIXME: I HAVE NO IDEA WHY THIS WORKS
             let dayProgram = days[dateComp.weekday - 1]
             let tempType = dayProgram.getTemperature(dateComp.hour, minutes: dateComp.minute)
@@ -50,8 +52,8 @@ import UIKit
     func getNextSwitch(date: NSDate) -> Switch? {
         let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
 
-        if let dateComp = calendar?.components(.WeekdayCalendarUnit | .HourCalendarUnit | .MinuteCalendarUnit, fromDate: date) {
-            var dayIndex = dateComp.weekday - 1
+        if let dateComp = calendar?.components([.Weekday, .Hour, .Minute], fromDate: date) {
+            let dayIndex = dateComp.weekday - 1
             let dayProgram = days[dayIndex]
             if let sw  = dayProgram.getNextSwitch(hours: dateComp.hour, minutes: dateComp.minute) {
                 return sw

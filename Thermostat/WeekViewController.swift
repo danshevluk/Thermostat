@@ -20,7 +20,7 @@ class WeekViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("WeekdayCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("WeekdayCell", forIndexPath: indexPath) 
         cell.textLabel?.text = weekdays[indexPath.row]
         return cell
     }

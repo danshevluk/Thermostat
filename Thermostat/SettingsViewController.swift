@@ -84,7 +84,7 @@ class SettingsViewController: UITableViewController {
                 (picker, values, indexes) in
 
                 let newTemp = self.getTemperatureFromPickerIndexes(values)
-                println("new temperature: \(newTemp)")
+                print("new temperature: \(newTemp)")
                 self.settings.dayTemperature = newTemp
                 self.tableView.reloadData()
             }, cancelBlock: { ActionMultipleStringCancelBlock in return }, origin: view.superview)
@@ -97,14 +97,14 @@ class SettingsViewController: UITableViewController {
                 picker, values, indexes in
 
                 let newTemp = self.getTemperatureFromPickerIndexes(values)
-                println("new temperature: \(newTemp)")
+                print("new temperature: \(newTemp)")
                 self.settings.nighTemperature = newTemp
                 self.tableView.reloadData()
             }, cancelBlock: { ActionMultipleStringCancelBlock in return }, origin: view.superview)
     }
 
     private func showDatePicker() {
-        var datePicker = ActionSheetDatePicker(title: "Date And Time",
+        let datePicker = ActionSheetDatePicker(title: "Date And Time",
             datePickerMode: .DateAndTime,
             selectedDate: settings.date,
             doneBlock: {

@@ -29,14 +29,9 @@ class CopyScheduleViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("DayCell", forIndexPath: indexPath) as! UITableViewCell
-        
-        if daysToCopy[indexPath.row] {
-            cell.accessoryType = .Checkmark
-        } else {
-            cell.accessoryType = .None
-        }
-        
+        let cell = tableView.dequeueReusableCellWithIdentifier("DayCell", forIndexPath: indexPath)
+
+        cell.accessoryType = daysToCopy[indexPath.row] ? .Checkmark : .None
         cell.textLabel?.text = weekdays[indexPath.row]
 
         if indexPath.row == dayOfTheWeek {
@@ -57,7 +52,7 @@ class CopyScheduleViewController: UITableViewController {
     @IBAction func copySchedule(sender: UIBarButtonItem) {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let okActionHandler = { (_: UIAlertAction!) -> Void in
-            for (index, dayToCopy) in enumerate(self.daysToCopy) {
+            for (index, dayToCopy) in self.daysToCopy.enumerate() {
                 if dayToCopy == true {
                     let day = index == 6 ? 0 : index + 1
                     Thermostat.sharedInstance.program.days[day] = self.dayProgram.copy() as! DayProgram

@@ -62,7 +62,7 @@ class DayViewController: UITableViewController, NewSwitchTableViewControllerDele
         
         if indexPath.section == 0 {
             cell = tableView.dequeueReusableCellWithIdentifier("StartCell",
-                    forIndexPath: indexPath) as! UITableViewCell
+                    forIndexPath: indexPath) 
             if let firstSwitchTypeControl = cell.viewWithTag(2) as? UISegmentedControl,
                     firstSwitch = dayProgram.switches.first {
                 firstSwitchTypeControl.selectedSegmentIndex = firstSwitch.type.rawValue
@@ -70,7 +70,7 @@ class DayViewController: UITableViewController, NewSwitchTableViewControllerDele
         } else {
             let switchModel = dayProgram.switches[indexPath.row]
             cell = tableView.dequeueReusableCellWithIdentifier("SwitchCell",
-                    forIndexPath: indexPath) as! UITableViewCell
+                    forIndexPath: indexPath)
 
             let time = switchModel.getHoursMinutes()
             if let switchTimeLabel = cell.viewWithTag(1) as? UILabel,
